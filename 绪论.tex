@@ -1,0 +1,261 @@
+\documentclass{article}
+\usepackage{xeCJK}
+
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{pgfplots}
+
+\newtheorem{problem}{题}
+\newenvironment{solution}
+{\begin{proof}[\textbf{解}]\renewcommand{\qedsymbol}{}}
+{\end{proof}}
+
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{大学物理实验\ 绪论\ 作业}
+\author{微电子科学与工程 2 班 \quad 王奕杰}
+\renewcommand{\today}{\small{\the\year 年 \the\month 月 \the\day 日}}
+
+\begin{document}
+\maketitle
+
+% \begin{abstract}
+% Your abstract.
+% \end{abstract}
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+\begin{problem}
+改正下列结果表达式的错误（15分）
+\begin{enumerate}[label=(\arabic*)]
+    \item $12.0010 \pm 0.0006255 (\unit{cm})$
+    \item $0.576361 \pm 0.00052 (\unit{mm})$
+    \item $9.755 \pm 0.0626 (\unit{mA})$
+    \item $96500 \pm 500 (\unit{g})$
+    \item $22 \pm 0.5 \, (\unit{\celsius})$
+\end{enumerate}
+\end{problem}
+\end{minipage}
+\hfill
+% \vrule 中间分割线
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\begin{solution}
+\leavevmode
+\begin{enumerate}[label=(\arabic*)]
+    \item $12.0010 \pm 0.0007 (\unit{cm})$
+    \item $0.5764 \pm 0.0006 (\unit{mm})$
+    \item $9.75 \pm 0.07 (\unit{mA})$
+    \item $96.5 \pm 0.5 (\unit{kg})$
+    \item $22.0 \pm 0.5 (\unit{\celsius})$
+\end{enumerate}
+\end{solution}
+\end{minipage}
+
+
+\begin{problem}
+用级别为 $0.5$ 、量程为 $10\mathrm{mA}$ 的电流表对某电路的电流作 $10$ 次等精度测量，测量数据如下表所示。试计算测量结果及其不确定度，并以测量结果形式表示之。（要求判别和剔除异常数据）（30分）
+\end{problem}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ccccccccccc}
+\toprule
+$n$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ \\ \midrule
+$I/\text{mA}$ & $9.55$ & $9.56$ & $9.50$ & $9.53$ & $9.60$ & $9.40$ & $9.57$ & $9.62$ & $9.59$ & $9.56$ \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\begin{solution}
+
+计算算术平均值
+
+\[
+\bar{I} = \frac{1}{10}\sum_{i=1}^{10} I_i = 9.548(\mathrm{mA})
+\]
+
+计算标准偏差
+
+\[
+\sigma_I = \sqrt{\frac{\sum_{i=1}^{10} \left(I_i - \bar{I}\right)^2}{10 - 1}} = 0.0623(\mathrm{mA})
+\]
+
+根据格拉布斯准则取显著水平 $\alpha = 0.05, n = 10$，对照相应表格可知临界值 $ g_0({10,0.05}) = 2.18 $。
+取 $\Delta I_{\max}$ 计算 $g_i$ 值，有
+
+\[
+g_6 = \frac{\Delta I_6}{\sigma_I}=\frac{0.148}{0.0623} = 2.375
+\]
+
+% 注：其他同学计算不知道为什么 Delta I_6 = 0.158 (g_6 = 2.536) 需要剔除，但是我算出来是 0.148 对应 g_6 = 2.375 < 2.41 不应剔除
+
+由 $g_6=2.375 > g_0({10,0.05}) = 2.18$ 判定 $I_6$ 为异常数据，剔除 $I_6$ 后重新计算
+
+\[ \bar{I} = \frac{1}{9}\sum_{i=1}^{9} I_i = 9.564(\mathrm{mA}) \]
+\[ \sigma_I = \sqrt{\frac{\sum_{i=1}^{9} \left(I_i - \bar{I}\right)^2}{9 - 1}} = 0.0344(\mathrm{mA}) \]
+
+再经格拉布斯准则判别，所有测量数据都符合要求。算术平均值 $\bar{I}$ 的标准偏差为
+
+\[
+{\sigma}_{\bar{{i}}}=\frac{{\sigma}_{I}}{\sqrt{n}}=\frac{{0}.{0344}}{\sqrt{9}}={0}.{01145}(\mathrm{mA})
+\]
+
+按均匀分布计算系统误差分量的标准偏差
+
+\[
+\sigma_{\text{仪}} = \frac{\Delta_{\text{仪}}}{\sqrt{3}} = \frac{10 \times 0.5\%}{\sqrt{3}} = 0.0289(\mathrm{mA})
+\]
+
+合成标准差
+
+\[
+\sigma = \sqrt{\sigma_{{I}}^2 + \sigma_{\text{仪}}^2} = 0.04(\mathrm{mA})
+\]
+
+测量结果表示为
+
+\[
+I = \bar{I} \pm \sigma = 9.56 \pm 0.04(\mathrm{mA})
+\]
+
+\end{solution}
+
+\begin{problem}
+    用公式 $\rho=4m/ \pi d^2h$ 测量某圆柱体铝的密度，测得直径 $d = 2.042 \pm 0.003 \mathrm{(cm)}$，高 $h = 4.126 \pm 0.004 \mathrm{(cm)}$，质量 $m = 36.488 \pm 0.006 \mathrm{(g)}$。
+    计算铝的密度 $\rho$ 及其不确定度，并以测量结果表达式表示之。（15分）
+\end{problem}
+
+\begin{solution}
+计算铝的密度
+$$\rho = \frac{4m}{\pi d^2 h} = 2.70 \mathrm{(g/cm^3)}$$
+由对数求导法
+\[
+\newcommand{\dd}{\mathrm{d}}
+\frac{\dd\rho}{\rho} = \frac{\dd m}{m} - 2\frac{\dd d}{d} - \frac{\dd h}{h}
+\]
+计算相对误差
+$$\frac{\sigma_\rho}{\rho} = \sqrt{\left(\frac{\sigma_m}{\bar m}\right)^2 + \left(2\frac{\sigma_d}{\bar d}\right)^2 + \left(\frac{\sigma_h}{\bar h}\right)^2} = 3.1 \times 10^{-3}$$
+求标准偏差
+$$\sigma_\rho = \rho \cdot \frac{\sigma_\rho}{\rho} = 0.009 \mathrm{(g/cm^3)}$$
+测量结果表示为
+\[
+\rho = 2.700 \pm 0.009 \mathrm{(g/cm^3)}
+\]
+\end{solution}
+
+% --- 第四题 ---
+
+\begin{problem}
+根据公式 $l_T = l_0(1+\alpha T)$ 测量某金属丝的线胀系数。$l_0$ 为金属丝在 $0\unit{\celsius}$ 时的长度。实验测得温度与对应的金属丝的长度的数据如下表所示。试用图解法求 $\alpha$ 和 $l_0$ 值。（20 分）
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ccccccccccc}
+\toprule
+$T / \unit{\celsius}$ & $23.3$ & $32.0$ & $41.0$ & $53.0$ & $62.0$ & $71.0$ & $87.0$ & $99.0$ \\ \midrule
+$l_T / \unit{mm}$ & $71.0$ & $73.0$ & $75.0$ & $78.0$ & $80.0$ & $82.0$ & $86.0$ & $89.1$ \\ \bottomrule
+\end{tabular}
+\end{table}
+\end{problem}
+
+\begin{solution}
+根据测量数据作图
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    title={金属丝的长度 $l_T$ - 温度 $T$ 曲线},
+    xlabel={$T / ^\circ\text{C}$},
+    ylabel={$l_T / \text{mm}$},
+    xmin=20, xmax=100,
+    ymin=70, ymax=90,
+    grid=both,
+    legend pos=north west,
+    width=0.8\textwidth,
+    height=0.5\textwidth
+]
+\addplot[only marks, blue, mark=+] coordinates {
+    (23.3, 71.0) (32.0, 73.0) (41.0, 75.0) (53.0, 78.0) 
+    (62.0, 80.0) (71.0, 82.0) (87.0, 86.0) (99.0, 89.1)
+};
+\addlegendentry{原始数据}
+\addplot[red, domain=20:100] {0.237931*x + 65.33462};
+\addlegendentry{拟合结果}
+\node at (axis cs: 65,74) [anchor=west] {$l_T = 65.33462 + 0.237931T$};
+\node at (axis cs: 65,72) [anchor=west] {$R^2 = 0.99952$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+由图解法拟合公式 $l_T = 65.3346(1 + 0.00364173T)$ 可得
+\[\alpha = \frac{k}{l_0} = 0.00364173 \quad l_0 = 65.3346\]
+\end{solution}
+
+% --- 第五题 ---
+\begin{problem}
+试根据下面 $6$ 组测量数据，用最小二乘法求出热敏电阻值随温度变化的经验公式，并求出 $R_T$ 与 $T$ 的相关系数。（20 分）
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ccccccccccc}
+\toprule
+$T / ^\circ\text{C}$ & $17.8$ & $26.9$ & $37.7$ & $48.2$ & $58.8$ & $69.3$  \\ \midrule
+$R_T / \Omega$ & $3.554$ & $3.687$ & $3.827$ & $3.969$ & $4.105$ & $4.246$ \\ \bottomrule
+\end{tabular}
+\end{table}
+\end{problem}
+
+\begin{solution}
+
+设经验公式为 $R_T = aT + b$，由最小二乘法得 
+
+\[
+    a = \frac{n \sum T_i R_i - \sum T_i \sum R_i}{n \sum T_i^2 - \left(\sum T_i\right)^2} = \frac{6 \times 1033.647 - 258.7 \times 23.388}{6 \times 13044.91 - 258.7^2} = 0.013347
+\]
+\[
+    b = \frac{\sum R_i - A \sum T_i}{n} = \frac{23.388 - 0.013347 \times 258.7}{6} = 3.322518
+\]
+\[
+    R^2 = \frac{\left(n \sum T_i R_i - \sum T_i \sum R_i\right)^2}{{\left(n \sum T_i^2 - \left(\sum T_i\right)^2\right)\left(n \sum R_i^2 - \left(\sum R_i\right)^2\right)}} = 0.999872
+\]
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    title={热敏电阻 $R$ - 温度 $T$ 曲线},
+    xlabel={$T / ^\circ\text{C}$},
+    ylabel={$R_T / \Omega$},
+    xmin=10, xmax=75,
+    ymin=3.5, ymax=4.3,
+    grid=both,
+    legend pos=north west,
+    width=0.8\textwidth,
+    height=0.5\textwidth
+]
+\addplot[only marks, blue, mark=+] coordinates {
+    (17.8, 3.554) (26.9, 3.687) (37.7, 3.827) 
+    (48.2, 3.969) (58.8, 4.105) (69.3, 4.246)
+};
+\addlegendentry{原始数据}
+\addplot[red, domain=10:80] {0.013347 * x + 3.322518};
+\addlegendentry{拟合曲线}
+\node at (axis cs: 45,3.7) [anchor=west] {$R_T =  3.322518 + 0.013347T$};
+\node at (axis cs: 45,3.62) [anchor=west] {$R^2 = 0.999872$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+$|R| \to 1$，由此可见 $R_T$ 与 $T$ 之间具有极强的线性相关性，拟合效果良好。得回归方程
+\[
+R_T = 3.322518 + 0.013347T
+\]
+\end{solution}
+
+\end{document}
