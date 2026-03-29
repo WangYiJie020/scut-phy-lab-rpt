@@ -20,6 +20,30 @@ The root `Makefile` uses XeLaTeX to compile every report directory under `src/` 
 ## Coding Style & Naming Conventions
 Keep LaTeX source readable and consistent with the existing files: 2-space indentation inside environments, one sentence or command block per line when practical, and aligned table rows for dense tabular data. Preserve the current naming pattern: report directories under `src/` use `main.tex` as the entry file, and image assets stay in the local `assets/` directory beside the document that uses them. Reuse `src/template/myrpt.cls` instead of redefining layout macros in each report.
 
+## Experiment Workflow
+Each experiment report is completed in two stages.
+
+1. Preparation stage: generate the report framework without measured data or data analysis.
+2. Completion stage: after the user provides reviewed data, fill in the tables, replace the raw-record appendix, and finish the analysis.
+
+During the preparation stage:
+
+- If `src/xxx/ref/` contains a reference answer document, follow its format and content first when drafting the report `tex` file.
+- Extract images and similar assets from the reference document into `src/xxx/assets/` when possible so the `tex` file can reference them directly. If extraction fails, tell the user so they can help provide the assets.
+- Use three-line tables for report tables.
+- Any table intended for later handwritten or measured lab data must use the `LabRecordTable` environment.
+- Keep table headers on one line when possible; if a header is too long, adjust column widths instead of letting the header wrap badly.
+- At the end of the draft report, use `\insertRawDataPage` so the raw-data appendix is auto-generated from the `LabRecordTable` contents.
+
+During the completion stage:
+
+- The user will update experiment data under `src/xxx/data/`.
+- The user will also provide the teacher-signed raw record image at `src/xxx/data/signed_RawRecord.jpg`.
+- Replace the previously inserted `\insertRawDataPage` appendix with the signed image file.
+- Fill the measured data back into the tables in the `tex` source.
+- Then read `src/xxx/ref/*.docx` and complete the missing data-analysis sections in the report.
+- If extra tooling is needed to inspect or extract content from a `.docx` file, ask the user before installing it.
+
 ## Testing Guidelines
 There is no automated test suite. The required check is successful compilation of every modified `.tex` entry file with XeLaTeX and a quick PDF review for broken figure paths, unresolved references, table overflow, and raw-data appendix placement. If you edit `src/template/myrpt.cls`, recompile at least one experiment report and one standalone file such as `src/绪论/main.tex`.
 
