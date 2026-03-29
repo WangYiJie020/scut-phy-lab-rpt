@@ -2,8 +2,9 @@
 
 LATEX := xelatex
 LATEX_FLAGS := -interaction=nonstopmode -halt-on-error -recorder
+SRC_DIR := src
 
-REPORTS := $(sort $(patsubst %/,%,$(dir $(wildcard */main.tex))))
+REPORTS := $(sort $(patsubst $(SRC_DIR)/%/,%,$(dir $(wildcard $(SRC_DIR)/*/main.tex))))
 OUTPUTS := $(REPORTS:%=output/%.pdf)
 DEPS := $(wildcard $(REPORTS:%=build/%/deps.mk))
 
@@ -15,12 +16,12 @@ $(REPORTS): %: output/%.pdf
 
 -include $(DEPS)
 
-output/%.pdf: %/main.tex Makefile | output
+output/%.pdf: $(SRC_DIR)/%/main.tex Makefile | output
 	@mkdir -p build/$*
-	@cd $* && $(LATEX) $(LATEX_FLAGS) -output-directory=../build/$* main.tex
-	@cd $* && $(LATEX) $(LATEX_FLAGS) -output-directory=../build/$* main.tex
+	@cd $(SRC_DIR)/$* && $(LATEX) $(LATEX_FLAGS) -output-directory=../../build/$* main.tex
+	@cd $(SRC_DIR)/$* && $(LATEX) $(LATEX_FLAGS) -output-directory=../../build/$* main.tex
 	@$(MAKE) --no-print-directory build/$*/deps.mk
-	@cp build/$*/main.pdf $@
+	@cp -f build/$*/main.pdf $@
 
 build/%/deps.mk: build/%/main.fls Makefile
 	@mkdir -p $(dir $@)
@@ -63,6 +64,11 @@ output:
 
 clean:
 	@rm -rf build
+
+clean-output:
+	@rm -rf output
+
+clean-all: clean clean-output
 
 distclean:
 	@rm -rf build output
