@@ -36,11 +36,11 @@
 \begin{problem}
 改正下列结果表达式的错误（15分）
 \begin{enumerate}[label=(\arabic*)]
-    \item $12.0010 \pm 0.0006255 (\unit{cm})$
-    \item $0.576361 \pm 0.00052 (\unit{mm})$
-    \item $9.755 \pm 0.0626 (\unit{mA})$
-    \item $96500 \pm 500 (\unit{g})$
-    \item $22 \pm 0.5 \, (\unit{\celsius})$
+  \item $12.0010 \pm 0.0006255 (\unit{cm})$
+  \item $0.576361 \pm 0.00052 (\unit{mm})$
+  \item $9.755 \pm 0.0626 (\unit{mA})$
+  \item $96500 \pm 500 (\unit{g})$
+  \item $22 \pm 0.5 \, (\unit{\celsius})$
 \end{enumerate}
 \end{problem}
 \end{minipage}
@@ -51,11 +51,11 @@
 \begin{solution}
 \leavevmode
 \begin{enumerate}[label=(\arabic*)]
-    \item $12.0010 \pm 0.0007 (\unit{cm})$
-    \item $0.5764 \pm 0.0006 (\unit{mm})$
-    \item $9.75 \pm 0.07 (\unit{mA})$
-    \item $96.5 \pm 0.5 (\unit{kg})$
-    \item $22.0 \pm 0.5 (\unit{\celsius})$
+  \item $12.0010 \pm 0.0007 (\unit{cm})$
+  \item $0.5764 \pm 0.0006 (\unit{mm})$
+  \item $9.75 \pm 0.07 (\unit{mA})$
+  \item $96.5 \pm 0.5 (\unit{kg})$
+  \item $22.0 \pm 0.5 (\unit{\celsius})$
 \end{enumerate}
 \end{solution}
 \end{minipage}
@@ -129,8 +129,8 @@ I = \bar{I} \pm \sigma = 9.56 \pm 0.04(\mathrm{mA})
 \end{solution}
 
 \begin{problem}
-    用公式 $\rho=4m/ \pi d^2h$ 测量某圆柱体铝的密度，测得直径 $d = 2.042 \pm 0.003 \mathrm{(cm)}$，高 $h = 4.126 \pm 0.004 \mathrm{(cm)}$，质量 $m = 36.488 \pm 0.006 \mathrm{(g)}$。
-    计算铝的密度 $\rho$ 及其不确定度，并以测量结果表达式表示之。（15分）
+  用公式 $\rho=4m/ \pi d^2h$ 测量某圆柱体铝的密度，测得直径 $d = 2.042 \pm 0.003 \mathrm{(cm)}$，高 $h = 4.126 \pm 0.004 \mathrm{(cm)}$，质量 $m = 36.488 \pm 0.006 \mathrm{(g)}$。
+  计算铝的密度 $\rho$ 及其不确定度，并以测量结果表达式表示之。（15分）
 \end{problem}
 
 \begin{solution}
@@ -171,19 +171,19 @@ $l_T / \unit{mm}$ & $71.0$ & $73.0$ & $75.0$ & $78.0$ & $80.0$ & $82.0$ & $86.0$
 \begin{center}
 \begin{tikzpicture}
 \begin{axis}[
-    title={金属丝的长度 $l_T$ - 温度 $T$ 曲线},
-    xlabel={$T / ^\circ\text{C}$},
-    ylabel={$l_T / \text{mm}$},
-    xmin=20, xmax=100,
-    ymin=70, ymax=90,
-    grid=both,
-    legend pos=north west,
-    width=0.8\textwidth,
-    height=0.5\textwidth
+  title={金属丝的长度 $l_T$ - 温度 $T$ 曲线},
+  xlabel={$T / ^\circ\text{C}$},
+  ylabel={$l_T / \text{mm}$},
+  xmin=20, xmax=100,
+  ymin=70, ymax=90,
+  grid=both,
+  legend pos=north west,
+  width=0.8\textwidth,
+  height=0.5\textwidth
 ]
 \addplot[only marks, blue, mark=+] coordinates {
-    (23.3, 71.0) (32.0, 73.0) (41.0, 75.0) (53.0, 78.0) 
-    (62.0, 80.0) (71.0, 82.0) (87.0, 86.0) (99.0, 89.1)
+  (23.3, 71.0) (32.0, 73.0) (41.0, 75.0) (53.0, 78.0) 
+  (62.0, 80.0) (71.0, 82.0) (87.0, 86.0) (99.0, 89.1)
 };
 \addlegendentry{原始数据}
 \addplot[red, domain=20:100] {0.237931*x + 65.33462};
@@ -217,31 +217,31 @@ $R_T / \Omega$ & $3.554$ & $3.687$ & $3.827$ & $3.969$ & $4.105$ & $4.246$ \\ \b
 设经验公式为 $R_T = aT + b$，由最小二乘法得 
 
 \[
-    a = \frac{n \sum T_i R_i - \sum T_i \sum R_i}{n \sum T_i^2 - \left(\sum T_i\right)^2} = \frac{6 \times 1033.647 - 258.7 \times 23.388}{6 \times 13044.91 - 258.7^2} = 0.013347
+  a = \frac{n \sum T_i R_i - \sum T_i \sum R_i}{n \sum T_i^2 - \left(\sum T_i\right)^2} = \frac{6 \times 1033.647 - 258.7 \times 23.388}{6 \times 13044.91 - 258.7^2} = 0.013347
 \]
 \[
-    b = \frac{\sum R_i - A \sum T_i}{n} = \frac{23.388 - 0.013347 \times 258.7}{6} = 3.322518
+  b = \frac{\sum R_i - A \sum T_i}{n} = \frac{23.388 - 0.013347 \times 258.7}{6} = 3.322518
 \]
 \[
-    R^2 = \frac{\left(n \sum T_i R_i - \sum T_i \sum R_i\right)^2}{{\left(n \sum T_i^2 - \left(\sum T_i\right)^2\right)\left(n \sum R_i^2 - \left(\sum R_i\right)^2\right)}} = 0.999872
+  R^2 = \frac{\left(n \sum T_i R_i - \sum T_i \sum R_i\right)^2}{{\left(n \sum T_i^2 - \left(\sum T_i\right)^2\right)\left(n \sum R_i^2 - \left(\sum R_i\right)^2\right)}} = 0.999872
 \]
 
 \begin{center}
 \begin{tikzpicture}
 \begin{axis}[
-    title={热敏电阻 $R$ - 温度 $T$ 曲线},
-    xlabel={$T / ^\circ\text{C}$},
-    ylabel={$R_T / \Omega$},
-    xmin=10, xmax=75,
-    ymin=3.5, ymax=4.3,
-    grid=both,
-    legend pos=north west,
-    width=0.8\textwidth,
-    height=0.5\textwidth
+  title={热敏电阻 $R$ - 温度 $T$ 曲线},
+  xlabel={$T / ^\circ\text{C}$},
+  ylabel={$R_T / \Omega$},
+  xmin=10, xmax=75,
+  ymin=3.5, ymax=4.3,
+  grid=both,
+  legend pos=north west,
+  width=0.8\textwidth,
+  height=0.5\textwidth
 ]
 \addplot[only marks, blue, mark=+] coordinates {
-    (17.8, 3.554) (26.9, 3.687) (37.7, 3.827) 
-    (48.2, 3.969) (58.8, 4.105) (69.3, 4.246)
+  (17.8, 3.554) (26.9, 3.687) (37.7, 3.827) 
+  (48.2, 3.969) (58.8, 4.105) (69.3, 4.246)
 };
 \addlegendentry{原始数据}
 \addplot[red, domain=10:80] {0.013347 * x + 3.322518};
