@@ -38,9 +38,9 @@ def main() -> None:
     temperatures: list[float] = []
     lg_i0_values: list[float] = []
 
-    print("Per-temperature fit: lg(Ia/mA) = a * sqrt(Ua) + b")
+    print("Per-temperature fit: lg(Ia/uA) = a * sqrt(Ua) + b")
     for filament_current, row in RAW_DATA_UA.items():
-        lg_ia = [math.log10(value / 1000.0) for value in row]
+        lg_ia = [math.log10(value) for value in row]
         slope, intercept, r2 = linfit(sqrt_u, lg_ia)
         temperature = 900 + 1430 * filament_current
         temperatures.append(temperature)
@@ -48,7 +48,7 @@ def main() -> None:
         print(
             f"If={filament_current:.3f} A, T={temperature:.2f} K, "
             f"a={slope:.8f}, b={intercept:.8f}, R^2={r2:.6f}, "
-            f"I0={10 ** intercept:.8f} mA"
+            f"I0={10 ** intercept:.8f} uA"
         )
         print("  points:", " ".join(f"({x:.4f},{y:.4f})" for x, y in zip(sqrt_u, lg_ia)))
 
@@ -63,7 +63,7 @@ def main() -> None:
 
     print("\nTable-2 values")
     print("T / K:", " ".join(f"{value:.2f}" for value in temperatures))
-    print("lg I / mA:", " ".join(f"{value:.4f}" for value in lg_i0_values))
+    print("lg I / uA:", " ".join(f"{value:.4f}" for value in lg_i0_values))
     print("1/T / 1e-4 K^-1:", " ".join(f"{value * 1e4:.4f}" for value in inv_t))
     print("lg(I/T^2):", " ".join(f"{value:.4f}" for value in lg_i_over_t2))
 
