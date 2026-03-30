@@ -39,6 +39,10 @@ During the completion stage:
 
 - The user will update experiment data under `src/xxx/data/`.
 - The user will also provide the teacher-signed raw record image at `src/xxx/data/signed_RawRecord.jpg`.
+- If measured data needs to be extracted from `src/xxx/data/signed_RawRecord.jpg`, read the corresponding `src/xxx/main.tex` first and use every `LabRecordTable` in that file as the primary reference for the expected table structure, headers, units, fixed printed text, and intentionally blank regions.
+- Do not assume signed raw-record tables share one fixed layout across experiments; interpret each image against its own report `tex` file instead of reusing another experiment’s table pattern.
+- Treat image recognition as a guided extraction task: compare the image against the referenced `LabRecordTable` definition and flag uncertain or structurally conflicting cells for review instead of silently guessing values.
+- If helpful, extract `LabRecordTable` context into a temporary or structured helper file under `src/xxx/data/` or `build/`, but avoid coupling the workflow to unstable template internals in `src/template/myrpt.cls`.
 - Replace the draft-stage `\insertRawDataPage` call with `\insertSignedDataPage`.
 - `\insertSignedDataPage` is the standard way to insert the signed raw-record scan; do not manually recreate that page layout in each report unless there is a specific exception.
 - Fill the measured data back into the tables in the `tex` source.
