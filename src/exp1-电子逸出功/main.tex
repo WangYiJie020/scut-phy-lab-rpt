@@ -1,5 +1,6 @@
 \documentclass{../template/myrpt}
 \ExamName{电子逸出功的测量}
+\pgfplotsset{compat=1.18}
 
 \begin{document}
 \maketitle
@@ -89,7 +90,7 @@ $$
   % \begin{enumerate}[nosep, leftmargin=*] % nosep 消除所有垂直间隙
   \textbf{1.} 按照图1.2a连接好实验电路，接通电源。\\
   \textbf{2.} 调节理想二极管灯丝电流 $I_f$，在 0.6--0.7A 之间每隔 0.025A 进行一次测量。对于每一灯丝电流，预热 3--5 分钟，对应温度按照：$T = 900 + 1430 I_f$ 求得（如果阳极电流 $I_a$ 偏小或偏大，也可适当增加或降低灯丝电流 $I_f$）。\\
-  \textbf{3.} 对每一灯丝电流，在阳极上依次加上 25V, 36V, 49V, 64V, 81V, 100V, 121V, 144V 电压，各测出一组阳极电流 $I_a$ 填入表1。
+  \textbf{3.} 对每一灯丝电流，在阳极上依次加上 16V, 25V, 36V, 49V, 64V, 81V, 100V 电压，各测出一组阳极电流 $I_a$ 填入表1。
   % \end{enumerate}
 \end{minipage}
 \hfill
@@ -106,27 +107,88 @@ $$
   \caption{不同灯丝电流 $I_f$ 和阳极电压 $U_a$ 对应的阳极电流 $I_a$ 值}
   \label{table1}
   \setlength{\tabcolsep}{3.5pt}
-  \begin{tabularx}{\textwidth}{c *{8}{Y}}
+  \begin{tabularx}{\textwidth}{c *{7}{Y}}
     \toprule
-    & \multicolumn{8}{c}{$U_a$ / V} \\
-    \cmidrule(lr){2-9}
-    $I_f$ / A & 25 & 36 & 49 & 64 & 81 & 100 & 121 & 144 \\
+    & \multicolumn{7}{c}{$U_a$ / V} \\
+    \cmidrule(lr){2-8}
+    $I_f$ / A & 16 & 25 & 36 & 49 & 64 & 81 & 100 \\
     \midrule
-    0.600 & & & & & & & & \\
-    0.625 & & & & & & & & \\
-    0.650 & & & & & & & & \\
-    0.675 & & & & & & & & \\
-    0.700 & & & & & & & & \\
+    0.600 & 62 & 63 & 64 & 68 & 70 & 73 & 73 \\
+    0.625 & 117 & 121 & 125 & 130 & 134 & 136 & 140 \\
+    0.650 & 213 & 224 & 230 & 237 & 244 & 252 & 260 \\
+    0.675 & 374 & 393 & 408 & 418 & 432 & 441 & 452 \\
+    0.700 & 629 & 669 & 698 & 720 & 741 & 756 & 776 \\
     \bottomrule
-    \multicolumn{9}{l}{\small 注：表中数据单位为 mA。}
+    \multicolumn{8}{l}{\small 注：签字原始记录中的电流单位为 $\mu$A。}
   \end{tabularx}
 \end{LabRecordTable}
 
 \section{实验数据处理}
 \begin{enumerate}
-  \item 根据表 \ref{table1} 中的数据，作出 $\lg I_a \sim \sqrt{U_a}$ 图线（图 ?）。直线的截距即为对应关系式中的 $\lg I$，由此可得在不同阴极温度时的零场热电子发射电流 $I$。 
-  \item 将图 ? 中各温度下的直线截距值填入表 \ref{table2} ，作出 $\lg (I/T^2) \sim 1/T$ 图线（图 ?）。根据直线斜率，求电子逸出电势及金属钨的电子逸出功。并与公认值 4.54 eV 比较，求测量相对误差。 
+  \item 原始记录中的阳极电流单位为 $\mu$A，作图计算前先统一换算为 mA。根据表 \ref{table1} 中的数据，作出 $\lg I_a \sim \sqrt{U_a}$ 图线（图 \ref{fig-lgia}）。直线的截距即为对应关系式中的 $\lg I$，由此可得在不同阴极温度时的零场热电子发射电流 $I$。
+  \item 将图 \ref{fig-lgia} 中各温度下的直线截距值填入表 \ref{table2}，作出 $\lg (I/T^2) \sim 1/T$ 图线（图 \ref{fig-richardson}）。根据直线斜率，求电子逸出电势及金属钨的电子逸出功，并与公认值 4.54 eV 比较求相对误差。
 \end{enumerate}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.88\textwidth,
+      height=0.56\textwidth,
+      xlabel={$\sqrt{U_a} / \sqrt{\mathrm{V}}$},
+      ylabel={$\lg(I_a / \mathrm{mA})$},
+      xmin=3.8, xmax=10.2,
+      ymin=-1.35, ymax=0.00,
+      grid=both,
+      legend style={font=\small, at={(0.03,0.97)}, anchor=north west, fill=white, draw=none},
+      tick label style={font=\small},
+      label style={font=\small}
+    ]
+      \addplot[only marks, mark=*, blue] coordinates {
+        (4.0000,-1.2076) (5.0000,-1.2007) (6.0000,-1.1938) (7.0000,-1.1675) (8.0000,-1.1549) (9.0000,-1.1367) (10.0000,-1.1367)
+      };
+      \addplot[blue, domain=4:10, samples=2] {0.01355986*x - 1.26603835};
+      \addlegendentry{$I_f=0.600\,\mathrm{A}$}
+
+      \addplot[only marks, mark=square*, red] coordinates {
+        (4.0000,-0.9318) (5.0000,-0.9172) (6.0000,-0.9031) (7.0000,-0.8861) (8.0000,-0.8729) (9.0000,-0.8665) (10.0000,-0.8539)
+      };
+      \addplot[red, domain=4:10, samples=2] {0.01305459*x - 0.98158262};
+      \addlegendentry{$I_f=0.625\,\mathrm{A}$}
+
+      \addplot[only marks, mark=triangle*, teal!70!black] coordinates {
+        (4.0000,-0.6716) (5.0000,-0.6498) (6.0000,-0.6383) (7.0000,-0.6253) (8.0000,-0.6126) (9.0000,-0.5986) (10.0000,-0.5850)
+      };
+      \addplot[teal!70!black, domain=4:10, samples=2] {0.01384815*x - 0.72281314};
+      \addlegendentry{$I_f=0.650\,\mathrm{A}$}
+
+      \addplot[only marks, mark=diamond*, orange!90!black] coordinates {
+        (4.0000,-0.4271) (5.0000,-0.4056) (6.0000,-0.3893) (7.0000,-0.3788) (8.0000,-0.3645) (9.0000,-0.3556) (10.0000,-0.3449)
+      };
+      \addplot[orange!90!black, domain=4:10, samples=2] {0.01327558*x - 0.47376313};
+      \addlegendentry{$I_f=0.675\,\mathrm{A}$}
+
+      \addplot[only marks, mark=*, purple!70!black] coordinates {
+        (4.0000,-0.2013) (5.0000,-0.1746) (6.0000,-0.1561) (7.0000,-0.1427) (8.0000,-0.1302) (9.0000,-0.1215) (10.0000,-0.1101)
+      };
+      \addplot[purple!70!black, domain=4:10, samples=2] {0.01449241*x - 0.24952307};
+      \addlegendentry{$I_f=0.700\,\mathrm{A}$}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{$\lg I_a \sim \sqrt{U_a}$ 拟合图线}
+  \label{fig-lgia}
+\end{figure}
+
+由图 \ref{fig-lgia} 中 5 组直线的纵截距可得零场热电子发射电流：
+\[
+\begin{aligned}
+I_{0,0.600} &= 10^{-1.2660} = 0.0542\,\mathrm{mA}, \\
+I_{0,0.625} &= 10^{-0.9816} = 0.1043\,\mathrm{mA}, \\
+I_{0,0.650} &= 10^{-0.7228} = 0.1893\,\mathrm{mA}, \\
+I_{0,0.675} &= 10^{-0.4738} = 0.3359\,\mathrm{mA}, \\
+I_{0,0.700} &= 10^{-0.2495} = 0.5630\,\mathrm{mA}.
+\end{aligned}
+\]
 
 \begin{table}[htbp]
   \centering
@@ -134,17 +196,70 @@ $$
   \label{table2}
   \begin{tabularx}{\textwidth}{c *{5}{Y}}
     \toprule
-    $I_f$ / A & & & & & \\
+    $I_f$ / A & 0.600 & 0.625 & 0.650 & 0.675 & 0.700 \\
     \midrule
-    $T$ / K & & & & & \\
-    $\lg I$ / mA & & & & & \\
-    $1/T$ / $10^{-4}\,\mathrm{K}^{-1}$ & & & & & \\
-    $\lg(I/T^2)$ & & & & & \\
+    $T$ / K & 1758.00 & 1793.75 & 1829.50 & 1865.25 & 1901.00 \\
+    $\lg I$ / mA & -1.2660 & -0.9816 & -0.7228 & -0.4738 & -0.2495 \\
+    $1/T$ / $10^{-4}\,\mathrm{K}^{-1}$ & 5.6883 & 5.5749 & 5.4660 & 5.3612 & 5.2604 \\
+    $\lg(I/T^2)$ & -7.7561 & -7.4891 & -7.2475 & -7.0152 & -6.8075 \\
     \bottomrule
   \end{tabularx}
 \end{table}
 
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.82\textwidth,
+      height=0.52\textwidth,
+      xlabel={$1/T \,/\, 10^{-4}\,\mathrm{K}^{-1}$},
+      ylabel={$\lg(I/T^2)$},
+      xmin=5.20, xmax=5.75,
+      ymin=-7.90, ymax=-6.70,
+      grid=both,
+      tick label style={font=\small},
+      label style={font=\small}
+    ]
+      \addplot[only marks, mark=*, blue] coordinates {
+        (5.6883,-7.7561) (5.5749,-7.4891) (5.4660,-7.2475) (5.3612,-7.0152) (5.2604,-6.8075)
+      };
+      \addplot[red, domain=5.2604:5.6883, samples=2] {-2.21814424*x + 4.87051371};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{$\lg(I/T^2)\sim 1/T$ 拟合图线}
+  \label{fig-richardson}
+\end{figure}
+
+由图 \ref{fig-richardson} 的线性拟合结果
+\[
+\lg\left(\frac{I}{T^2}\right) = -2.2181\times 10^4 \cdot \frac{1}{T} + 4.8705
+\]
+可得直线斜率
+\[
+m = -2.2181\times 10^4.
+\]
+根据
+\[
+m = -5.04\times 10^3 \varphi
+\]
+求得电子逸出电势
+\[
+\varphi = -\frac{m}{5.04\times 10^3} = 4.4011\,\mathrm{V}.
+\]
+因此金属钨的电子逸出功为
+\[
+e\varphi = 4.4011\,\mathrm{eV}.
+\]
+与公认值 $4.54\,\mathrm{eV}$ 比较，相对误差为
+\[
+\eta = \frac{|4.4011 - 4.54|}{4.54}\times 100\% = 3.06\%.
+\]
+
 \section{实验的分析和总结}
+
+由实验数据得到的 $\lg I_a \sim \sqrt{U_a}$ 图线均近似为直线，说明在固定阴极温度下，阳极电流的对数与 $\sqrt{U_a}$ 满足较好的线性关系，因此用加速场外延法求零场电流是可行的。随着灯丝电流从 $0.600\,\mathrm{A}$ 增加到 $0.700\,\mathrm{A}$，阴极温度升高，零场热电子发射电流也显著增大，这与热电子发射理论相符。
+
+由里查逊直线法求得金属钨的电子逸出功为 $4.4011\,\mathrm{eV}$，相对公认值 $4.54\,\mathrm{eV}$ 的误差为 $3.06\%$，结果与理论值较为接近。误差主要可能来自以下几个方面：其一，签字原始记录中的电流读数只有 $\mu$A 量级，人工读数存在一定分辨率误差；其二，实验中阴极温度采用经验公式 $T=900+1430I_f$ 间接给出，会引入系统误差；其三，拟合作图时默认各测量点完全满足线性模型，而空间电荷效应、接触电阻以及电源波动都会使直线出现轻微偏离。总体上，本次实验较好地完成了用里查逊直线法测量电子逸出功的任务。
 
 \newpage
 
