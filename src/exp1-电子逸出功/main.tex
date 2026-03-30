@@ -1,7 +1,5 @@
 \documentclass{../template/myrpt}
-\usepackage{wallpaper}
-
-\title{电子逸出功的测量}
+\ExamName{电子逸出功的测量}
 
 \begin{document}
 \maketitle
@@ -102,28 +100,27 @@ $$
 \end{minipage}
 
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
-\begin{table}[htbp]
+\begin{LabRecordTable}
   \centering
-  % 使用 \renewcommand{\arraystretch}{1.2} 增加行高，让表格不那么拥挤
-  \renewcommand{\arraystretch}{1.2} 
-  \caption{不同灯丝电流 $I_f$ 和阳极电压 $U_a$ 对应的阳极电流 $I_a$ 值} \label{table1}
-  
-  % 如果列数固定，有时直接用 tabular 比 tabularx 更容易控制间距
-  \begin{tabularx}{\textwidth}{c *{7}{Y}}
+  \renewcommand{\arraystretch}{1.2}
+  \caption{不同灯丝电流 $I_f$ 和阳极电压 $U_a$ 对应的阳极电流 $I_a$ 值}
+  \label{table1}
+  \setlength{\tabcolsep}{3.5pt}
+  \begin{tabularx}{\textwidth}{c *{8}{Y}}
     \toprule
-    & \multicolumn{7}{c}{$U_a$ / V} \\ 
-    \cmidrule(lr){2-8}
-    $I_f$ / A & 16 & 25 & 36 & 49 & 64 & 81 & 100 \\ 
+    & \multicolumn{8}{c}{$U_a$ / V} \\
+    \cmidrule(lr){2-9}
+    $I_f$ / A & 25 & 36 & 49 & 64 & 81 & 100 & 121 & 144 \\
     \midrule
-    0.600 & & & & & & & \\ 
-    0.625 & & & & & & & \\ 
-    0.650 & & & & & & & \\ 
-    0.675 & & & & & & & \\ 
-    0.700 & & & & & & & \\ 
+    0.600 & & & & & & & & \\
+    0.625 & & & & & & & & \\
+    0.650 & & & & & & & & \\
+    0.675 & & & & & & & & \\
+    0.700 & & & & & & & & \\
     \bottomrule
-    \multicolumn{8}{l}{\small 注：表中数据单位为 mA。} % 如果 caption 太长，可以在这里注明单位
+    \multicolumn{9}{l}{\small 注：表中数据单位为 mA。}
   \end{tabularx}
-\end{table}
+\end{LabRecordTable}
 
 \section{实验数据处理}
 \begin{enumerate}
@@ -133,14 +130,15 @@ $$
 
 \begin{table}[htbp]
   \centering
-  \caption{ $\lg I/T^2\sim 1/T$ 图线相关数据} \label{table2}
-  \begin{tabularx}{\textwidth}{c*{5}{X}}
+  \caption{$\lg(I/T^2)\sim 1/T$ 图线相关数据}
+  \label{table2}
+  \begin{tabularx}{\textwidth}{c *{5}{Y}}
     \toprule
-    $I_f$ (A) & & & & & \\
+    $I_f$ / A & & & & & \\
     \midrule
-    $T$ (K) & & & & & \\
-    $\lg I$ (mA) & & & & & \\
-    $1/T$ ($10^{-4} K^{-1}$) & & & & & \\
+    $T$ / K & & & & & \\
+    $\lg I$ / mA & & & & & \\
+    $1/T$ / $10^{-4}\,\mathrm{K}^{-1}$ & & & & & \\
     $\lg(I/T^2)$ & & & & & \\
     \bottomrule
   \end{tabularx}
@@ -150,29 +148,7 @@ $$
 
 \newpage
 
-\insertRawDataPage
-
-\begin{table}[htbp]
-  \centering
-  % 使用 \renewcommand{\arraystretch}{1.2} 增加行高，让表格不那么拥挤
-  \renewcommand{\arraystretch}{1.2} 
-  \caption*{不同灯丝电流 $I_f$ 和阳极电压 $U_a$ 对应的阳极电流 $I_a$ 值}
-  
-  % 如果列数固定，有时直接用 tabular 比 tabularx 更容易控制间距
-  \begin{tabularx}{\textwidth}{c *{7}{Y}}
-    \toprule
-    & \multicolumn{7}{c}{$U_a$ / V} \\ 
-    \cmidrule(lr){2-8}
-    $I_f$ / A & 16 & 25 & 36 & 49 & 64 & 81 & 100 \\ 
-    \midrule
-    0.600 & & & & & & & \\ 
-    0.625 & & & & & & & \\ 
-    0.650 & & & & & & & \\ 
-    0.675 & & & & & & & \\ 
-    0.700 & & & & & & & \\ 
-    \bottomrule
-    \multicolumn{8}{l}{\small 注：表中数据单位为 mA。} % 如果 caption 太长，可以在这里注明单位
-  \end{tabularx}
-\end{table}
+% \insertRawDataPage
+\insertSignedDataPage
 
 \end{document}
