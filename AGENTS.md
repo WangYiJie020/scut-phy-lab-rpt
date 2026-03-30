@@ -43,6 +43,9 @@ During the completion stage:
 - Do not assume signed raw-record tables share one fixed layout across experiments; interpret each image against its own report `tex` file instead of reusing another experiment’s table pattern.
 - Treat image recognition as a guided extraction task: compare the image against the referenced `LabRecordTable` definition and flag uncertain or structurally conflicting cells for review instead of silently guessing values.
 - If helpful, extract `LabRecordTable` context into a temporary or structured helper file under `src/xxx/data/` or `build/`, but avoid coupling the workflow to unstable template internals in `src/template/myrpt.cls`.
+- After extracting measured data from `signed_RawRecord.jpg`, show the extracted results to the user and explicitly ask whether any corrections are needed before treating the values as final.
+- Do not fill extracted values back into the report or continue the analysis until the user has either confirmed the data or provided corrections.
+- If you write helper scripts for data extraction or data processing during this stage, keep them as reproducible artifacts inside the experiment directory, preferably under `src/xxx/data/`, instead of leaving the workflow only in transient shell history.
 - Replace the draft-stage `\insertRawDataPage` call with `\insertSignedDataPage`.
 - `\insertSignedDataPage` is the standard way to insert the signed raw-record scan; do not manually recreate that page layout in each report unless there is a specific exception.
 - Fill the measured data back into the tables in the `tex` source.
