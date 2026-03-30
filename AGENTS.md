@@ -39,7 +39,8 @@ During the completion stage:
 
 - The user will update experiment data under `src/xxx/data/`.
 - The user will also provide the teacher-signed raw record image at `src/xxx/data/signed_RawRecord.jpg`.
-- Replace the previously inserted `\insertRawDataPage` appendix with the signed image file.
+- Replace the draft-stage `\insertRawDataPage` call with `\insertSignedDataPage`.
+- `\insertSignedDataPage` is the standard way to insert the signed raw-record scan; do not manually recreate that page layout in each report unless there is a specific exception.
 - Fill the measured data back into the tables in the `tex` source.
 - Then read `src/xxx/ref/*.docx` and complete the missing data-analysis sections in the report.
 - If extra tooling is needed to inspect or extract content from a `.docx` file, ask the user before installing it.
