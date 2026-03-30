@@ -33,9 +33,8 @@
 \titleformat{\subsection}{\normalsize\bfseries}{(\chinese{subsection})}{1em}{}
 \titleformat{\subsubsection}{\normalsize\bfseries}{\arabic{subsubsection}.}{1em}{}
 
-% \linespread{1.0}
-% \usepackage{setspace}
-% \renewcommand{\baselinestretch}{0.5}
+\RequirePackage{eso-pic}
+\RequirePackage{graphicx}
 
 \newcommand{\@ExamName}{}
 \newcommand{\ExamName}[1]{%
@@ -170,5 +169,21 @@
     \PrintAllLabRecordTables
 }
 \makeatother
+
+\newcommand{\insertSignedDataPage}{
+	\clearpage
+	\thispagestyle{empty}
+	\AddToShipoutPicture*{
+		\put(0,0){
+			\parbox[b][\paperheight]{\paperwidth}{
+				\vfill
+				\centering
+				\includegraphics[width=\paperwidth,height=\paperheight]{data/signed_RawRecord.jpg}
+				\vfill
+			}
+		}
+	}
+	\noindent 附件：原始数据
+}
 
 \date{}
