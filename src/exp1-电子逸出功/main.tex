@@ -150,32 +150,32 @@ $$
       \addplot[only marks, mark=*, blue] coordinates {
         (4.0000,1.7924) (5.0000,1.7993) (6.0000,1.8062) (7.0000,1.8325) (8.0000,1.8451) (9.0000,1.8633) (10.0000,1.8633)
       };
-      \addplot[blue, domain=4:10, samples=2] {0.01355986*x + 1.73396165};
       \addlegendentry{$I_f=0.600\,\mathrm{A}$}
+      \addplot[blue, domain=4:10, samples=2, forget plot] {0.01355986*x + 1.73396165};
 
       \addplot[only marks, mark=square*, red] coordinates {
         (4.0000,2.0682) (5.0000,2.0828) (6.0000,2.0969) (7.0000,2.1139) (8.0000,2.1271) (9.0000,2.1335) (10.0000,2.1461)
       };
-      \addplot[red, domain=4:10, samples=2] {0.01305459*x + 2.01841738};
       \addlegendentry{$I_f=0.625\,\mathrm{A}$}
+      \addplot[red, domain=4:10, samples=2, forget plot] {0.01305459*x + 2.01841738};
 
       \addplot[only marks, mark=triangle*, teal!70!black] coordinates {
         (4.0000,2.3284) (5.0000,2.3502) (6.0000,2.3617) (7.0000,2.3747) (8.0000,2.3874) (9.0000,2.4014) (10.0000,2.4150)
       };
-      \addplot[teal!70!black, domain=4:10, samples=2] {0.01384815*x + 2.27718686};
       \addlegendentry{$I_f=0.650\,\mathrm{A}$}
+      \addplot[teal!70!black, domain=4:10, samples=2, forget plot] {0.01384815*x + 2.27718686};
 
       \addplot[only marks, mark=diamond*, orange!90!black] coordinates {
         (4.0000,2.5729) (5.0000,2.5944) (6.0000,2.6107) (7.0000,2.6212) (8.0000,2.6355) (9.0000,2.6444) (10.0000,2.6551)
       };
-      \addplot[orange!90!black, domain=4:10, samples=2] {0.01327558*x + 2.52623687};
       \addlegendentry{$I_f=0.675\,\mathrm{A}$}
+      \addplot[orange!90!black, domain=4:10, samples=2, forget plot] {0.01327558*x + 2.52623687};
 
       \addplot[only marks, mark=*, purple!70!black] coordinates {
         (4.0000,2.7987) (5.0000,2.8254) (6.0000,2.8439) (7.0000,2.8573) (8.0000,2.8698) (9.0000,2.8785) (10.0000,2.8899)
       };
-      \addplot[purple!70!black, domain=4:10, samples=2] {0.01449241*x + 2.75047693};
       \addlegendentry{$I_f=0.700\,\mathrm{A}$}
+      \addplot[purple!70!black, domain=4:10, samples=2, forget plot] {0.01449241*x + 2.75047693};
     \end{axis}
   \end{tikzpicture}
   \caption{$\lg I_a \sim \sqrt{U_a}$ 拟合图线}
