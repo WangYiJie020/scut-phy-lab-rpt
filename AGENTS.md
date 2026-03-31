@@ -28,8 +28,9 @@ Each experiment report is completed in two stages.
 
 During the preparation stage:
 
-- If `src/xxx/ref/` contains a reference answer document, follow its format and content first when drafting the report `tex` file.
-- Extract images and similar assets from the reference document into `src/xxx/assets/` when possible so the `tex` file can reference them directly. If extraction fails, tell the user so they can help provide the assets.
+- If `src/xxx/ref/` contains multiple reference files, treat the file whose name contains `模板` as the teacher-provided template and use it as the primary reference during drafting.
+- If `src/xxx/ref/` contains reference answer documents but no file name contains `模板`, follow the most relevant reference document's format and content first when drafting the report `tex` file.
+- Extract images and similar assets used by the primary reference Word document into `src/xxx/assets/` when possible so the `tex` file can reference them directly. If extraction fails, tell the user so they can help provide the assets.
 - Use three-line tables for report tables.
 - Any table intended for later handwritten or measured lab data must use the `LabRecordTable` environment.
 - Keep table headers on one line when possible; if a header is too long, adjust column widths instead of letting the header wrap badly.
