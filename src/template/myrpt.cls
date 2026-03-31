@@ -161,12 +161,13 @@
 
 \makeatletter
 \newcommand{\insertRawDataPage}{
-    \newpage\ThisCenterWallPaper{1}{../template/原始数据记录表.pdf}
-    \vspace*{1.15cm}
-    \hspace{1.8cm}
-    \@ExamName
-    \vspace*{1cm}
-    \PrintAllLabRecordTables
+	\newpage\ThisCenterWallPaper{1}{../template/原始数据记录表.pdf}
+	\thispagestyle{empty}
+	\vspace*{1.05cm}
+	\hspace{1.8cm}
+	\@ExamName
+	\vspace*{1cm}
+	\PrintAllLabRecordTables
 }
 \makeatother
 
