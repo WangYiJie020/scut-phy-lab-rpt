@@ -34,6 +34,7 @@ During the preparation stage:
 - Use three-line tables for report tables.
 - Any table intended for later handwritten or measured lab data must use the `LabRecordTable` environment.
 - Keep table headers on one line when possible; if a header is too long, adjust column widths instead of letting the header wrap badly.
+- If the template document does not provide any thought questions, do not add thought-question sections or placeholder answers in the preparation-stage `tex` draft.
 - At the end of the draft report, use `\insertRawDataPage` so the raw-data appendix is auto-generated from the `LabRecordTable` contents.
 
 During the completion stage:
