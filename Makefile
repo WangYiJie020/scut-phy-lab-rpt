@@ -1,7 +1,8 @@
 .DEFAULT_GOAL := all
 
 LATEX := xelatex
-LATEX_FLAGS := -interaction=nonstopmode -halt-on-error -recorder
+LATEX_FLAGS := -interaction=nonstopmode -halt-on-error -recorder -shell-escape
+LATEX_ENV := PATH=/usr/bin:/bin:/home/linuxbrew/.linuxbrew/bin:$$PATH
 SRC_DIR := src
 
 REPORTS := $(sort $(patsubst $(SRC_DIR)/%/,%,$(dir $(wildcard $(SRC_DIR)/*/main.tex))))
@@ -18,8 +19,8 @@ $(REPORTS): %: output/%.pdf
 
 output/%.pdf: $(SRC_DIR)/%/main.tex Makefile | output
 	@mkdir -p build/$*
-	@cd $(SRC_DIR)/$* && $(LATEX) $(LATEX_FLAGS) -output-directory=../../build/$* main.tex
-	@cd $(SRC_DIR)/$* && $(LATEX) $(LATEX_FLAGS) -output-directory=../../build/$* main.tex
+	@cd $(SRC_DIR)/$* && $(LATEX_ENV) $(LATEX) $(LATEX_FLAGS) -output-directory=../../build/$* main.tex
+	@cd $(SRC_DIR)/$* && $(LATEX_ENV) $(LATEX) $(LATEX_FLAGS) -output-directory=../../build/$* main.tex
 	@$(MAKE) --no-print-directory build/$*/deps.mk
 	@cp -f build/$*/main.pdf $@
 

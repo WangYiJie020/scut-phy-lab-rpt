@@ -1,9 +1,3 @@
-"""Recompute the Richardson-fit results for exp1-电子逸出功.
-
-Input data are the user-corrected raw currents transcribed from
-signed_RawRecord.jpg. Currents in the table are recorded in microampere.
-"""
-
 from __future__ import annotations
 
 import math
