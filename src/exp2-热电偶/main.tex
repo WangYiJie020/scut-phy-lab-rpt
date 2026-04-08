@@ -1,0 +1,102 @@
+\documentclass{../template/myrpt}
+\ExamName{热电偶的定标实验}
+
+\begin{document}
+\maketitle
+
+\section{实验目的}
+\begin{enumerate}[label=\arabic*. ]
+  \item 了解热电偶测温的基本原理和方法；
+  \item 了解热电偶的定标方法；
+  \item 为热电偶定标。
+\end{enumerate}
+
+\section{实验仪器}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{minipage}[c]{0.42\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{assets/接线图.jpeg}
+    \caption{实验接线图}
+  \end{minipage}
+  \hspace{1em}
+  \begin{minipage}[c]{0.5\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{assets/平台界面.png}
+    \caption{实验平台界面}
+  \end{minipage}
+\end{figure}
+
+实验所用主要器材包括热学综合实验平台、双端热电偶传感器、保温杯、加热井和冰水混合物。
+
+\section{实验原理}
+
+\subsection{热电偶的定义、应用和分类}
+热电偶是将两种不同导体或半导体材料连接成回路后，利用两接点温度不同所产生的热电动势来进行测温的传感元件。它把温度这一非电量转化为电压信号进行测量，属于非电量电测法。热电偶具有结构简单、响应较快、测温范围宽、便于远距离传输和记录等优点，因此在工业测温、自动控制、科研实验和日常设备中都有广泛应用。
+
+按用途可将热电偶分为标准热电偶和工作热电偶；按材料组成又可分为多种不同分度号的热电偶。不同材料的热电偶适用温区和灵敏度不同，因此在实际测量前通常需要定标，建立该热电偶输出电动势与温度之间的对应关系。
+
+\subsection{热电效应与热电偶}
+热电偶测温的物理基础是热电效应。将两种不同导体 $A$ 和 $B$ 首尾连接成闭合回路，若两个接点温度不同，则回路中会产生热电动势；接触被测对象的一端称为热端或测量端，另一端称为冷端或参考端。热电偶正是利用热端与冷端之间的温差，将温度差转换为可测的电压信号。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.58\linewidth]{assets/热电偶原理示意.png}
+  \caption{热电偶测温原理示意图}
+\end{figure}
+
+热电偶的总热电动势主要由接触电动势和温差电动势组成。两种不同导体接触时，由于材料内部自由电子密度和逸出功不同，界面处会形成电势差，这一部分称为接触电动势；而同一种导体两端温度不同时，热端电子平均动能较大，电子会从高温端向低温端扩散，从而建立温差电动势。二者共同决定热电偶的输出电势。
+
+当热电偶材料确定后，总热电动势主要取决于热端温度 $T$ 与冷端温度 $T_0$。在一定温度范围内，可近似认为热电动势与温差成线性关系：
+\[
+  E(T,T_0) \approx c(T-T_0),
+\]
+其中 $c$ 为热电偶的温差系数，其大小由热电偶材料决定。若实验中将冷端置于冰水混合物中，则可近似认为 $T_0=0\,^{\circ}\mathrm{C}$，此时热电动势与热端温度近似成正比。
+
+\subsection{热电偶的定标}
+热电偶定标的目的是建立电动势与温度之间的定量关系，以便后续利用电势反推出待测温度。常用的定标方法包括比较法和固定点法。比较法是将被校热电偶与标准热电偶同时测量同一温度，通过对比得到校准关系；固定点法则是利用已知温度点测量热电偶输出电动势，再建立标准曲线。
+
+本实验采用固定点法进行热电偶定标。实验中改变加热井的设定温度，使热端分别处于 $40\,^{\circ}\mathrm{C}$、$50\,^{\circ}\mathrm{C}$、$60\,^{\circ}\mathrm{C}$、$70\,^{\circ}\mathrm{C}$、$80\,^{\circ}\mathrm{C}$、$90\,^{\circ}\mathrm{C}$ 和 $100\,^{\circ}\mathrm{C}$ 等已知温度点，同时保持冷端条件不变。对每个温度点测量对应的热电动势 $E(T)$，即可得到一组 $E(T)$ 与 $T$ 的对应数据。以温度 $T$ 为横轴、热电动势 $E(T)$ 为纵轴作图，并进行线性拟合，就可得到该热电偶在本实验温区内的定标曲线。
+
+\section{实验内容和步骤}
+
+\noindent\textbf{1.} 按图示组装好仪器，连接热学综合实验平台、热电偶传感器、毫伏测量端口和冷端保温杯，检查无误后打开实验平台电源。
+
+\noindent\textbf{2.} 在平台界面上，点击“实验目录”，选择“温差热电偶定标实验”，再从右侧“热学实验组件”中拖出控温器、毫伏表和图像模块。
+
+\noindent\textbf{3.} 调节控温器“设置温度”为 $40\,^{\circ}\mathrm{C}$，点击“确定”完成设定。待系统加热到设定温度并稳定后，点击数据记录表格下方的“记录”按钮，将毫伏表读数记录到表 \ref{table:calibration} 中。
+
+\noindent\textbf{4.} 重复步骤 3，依次将设定温度调整为 $50\,^{\circ}\mathrm{C}$、$60\,^{\circ}\mathrm{C}$、$70\,^{\circ}\mathrm{C}$、$80\,^{\circ}\mathrm{C}$、$90\,^{\circ}\mathrm{C}$ 和 $100\,^{\circ}\mathrm{C}$，在冷端条件保持不变的情况下，记录各温度点对应的热电动势。
+
+\noindent\textbf{5.} 点击平台上的“作图”按钮，观察热电偶的 $E(T)$--$T$ 定标曲线。完成阶段再根据保存的数据整理图线、进行拟合并补充分析。
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\begin{LabRecordTable}
+  \centering
+  \caption{热电偶温度电势记录表}
+  \label{table:calibration}
+  \renewcommand{\arraystretch}{1.25}
+  \setlength{\tabcolsep}{3.5pt}
+  \begin{tabularx}{\textwidth}{c *{7}{Y}}
+    \toprule
+    温度 $T$/\si{\celsius} & 40 & 50 & 60 & 70 & 80 & 90 & 100 \\
+    \midrule
+    电动势 $E(T)$/\si{\milli\volt} & & & & & & & \\
+    \bottomrule
+  \end{tabularx}
+\end{LabRecordTable}
+
+\section{实验的总结和分析}
+完成阶段补充以下内容：
+\begin{enumerate}[label=\arabic*. ]
+  \item 根据表 \ref{table:calibration} 中记录的数据绘制热电偶的 $E(T)$--$T$ 定标曲线，并给出拟合方程；
+  \item 分析实验所得电动势与温度之间的关系，说明该热电偶在本实验温区内的线性程度；
+  \item 讨论冷端温度、温度稳定程度、读数误差和接触情况等因素对定标结果的影响；
+  \item 若冷端不处于冰水混合物中，说明如何利用冷端补偿思想修正测量结果。
+\end{enumerate}
+
+\insertRawDataPage
+
+\end{document}
