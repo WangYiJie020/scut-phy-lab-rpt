@@ -1,5 +1,6 @@
 \documentclass{../template/myrpt}
 \ExamName{非良导体导热系数的测量}
+\pgfplotsset{compat=1.18}
 
 \begin{document}
 \maketitle
@@ -48,35 +49,35 @@
 \[
   \frac{\mathrm{d}T}{\mathrm{d}z}
   \approx
-  \frac{T_1 - T_2}{h}.
+  \frac{T_1 - T_2}{h_B}.
 \]
 
 稳态时，加热盘供给的热量、样品内部的传热量与散热盘向环境散失的热量三者相等，因此样品中的传热速率就等于散热盘 $A$ 在稳态温度 $T_2$ 下的散热速率。这样，原本难以直接测量的样品传热速率，便转化为测量散热盘的散热过程。
 
 \subsection{散热速率的参量转换}
-设散热盘 $A$ 的质量为 $m_A$，比热容为 $c$，其温度在自然冷却过程中随时间变化为 $T(t)$。根据热容量关系，散热盘在温度 $T_2$ 附近的散热速率可表示为
+设散热盘 $P$ 的质量为 $m$，比热容为 $c$，其温度在自然冷却过程中随时间变化为 $T(t)$。根据热容量关系，散热盘在温度 $T_2$ 附近的散热速率可表示为
 \[
   \left.\frac{\mathrm{d}Q}{\mathrm{d}t}\right|_{T=T_2}
   =
-  -m_Ac
+  -mc
   \left.\frac{\mathrm{d}T}{\mathrm{d}t}\right|_{T=T_2}.
 \]
 式中负号表示冷却过程中散热盘温度随时间下降。实验上先使散热盘温度略高于稳态温度 $T_2$，再记录其自然冷却曲线，在 $T=T_2$ 附近取切线斜率，即可求得该温度下的冷却速率。
 
-但应注意，上式对应的是散热盘全部表面均暴露于空气中时的冷却过程；而在稳态测量中，散热盘上表面与样品接触，被覆盖部分不再直接向空气散热，因此必须做面积修正。若散热盘 $A$ 的半径和厚度分别为 $R_A$ 与 $h_A$，则其自然冷却时的总散热面积为
+但应注意，上式对应的是散热盘全部表面均暴露于空气中时的冷却过程；而在稳态测量中，散热盘上表面与样品接触，被覆盖部分不再直接向空气散热，因此必须做面积修正。若散热盘 $P$ 的半径和厚度分别为 $R_P$ 与 $h_P$，则其自然冷却时的总散热面积为
 \[
-  2\pi R_A^2 + 2\pi R_A h_A,
+  2\pi R_P^2 + 2\pi R_P h_P,
 \]
 而稳态测量时的有效散热面积为
 \[
-  \pi R_A^2 + 2\pi R_A h_A.
+  \pi R_P^2 + 2\pi R_P h_P.
 \]
 稳态时散热盘的实际散热速率应修正为
 \[
   \frac{\mathrm{d}Q}{\mathrm{d}t}
   =
-  -m_Ac
-  \frac{R_A + 2h_A}{2R_A + 2h_A}
+  -mc
+  \frac{R_P + 2h_P}{2R_P + 2h_P}
   \left.\frac{\mathrm{d}T}{\mathrm{d}t}\right|_{T=T_2}.
 \]
 
@@ -88,10 +89,10 @@
 \[
   \lambda
   =
-  -m_Ac
-  \frac{R_A + 2h_A}{2R_A + 2h_A}
+  -mc
+  \frac{R_P + 2h_P}{2R_P + 2h_P}
   \frac{1}{\pi R_B^2}
-  \frac{h_A}{T_1 - T_2}
+  \frac{h_B}{T_1 - T_2}
   \left.\frac{\mathrm{d}T}{\mathrm{d}t}\right|_{T=T_2}.
 \]
 本实验中铜盘比热容取
@@ -137,7 +138,7 @@
     \toprule
     散热盘厚度 $h_P$/mm & 样品厚度 $h_B$/mm & 散热盘半径 $R_P$/mm & 样品半径 $R_B$/mm & 散热盘质量 $m$/g \\
     \midrule
-    \rule{0pt}{2.8ex} & & & & \\
+    \rule{0pt}{2.8ex} 7.0 & 5.0 & 65.0 & 65.0 & 823 \\
     \bottomrule
   \end{tabularx}
 \end{LabRecordTable}
@@ -152,8 +153,8 @@
     \toprule
     序号 $i$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
     \midrule
-    $T_1$/\si{\celsius} & & & & & & & & & & \\
-    $T_2$/\si{\celsius} & & & & & & & & & & \\
+    $T_1$/\si{\celsius} & 79.6 & 79.6 & 79.6 & 79.6 & 79.5 & 79.5 & 79.5 & 79.5 & 79.5 & 79.5 \\
+    $T_2$/\si{\celsius} & 57.8 & 58.1 & 58.4 & 58.6 & 58.8 & 59.0 & 59.2 & 59.3 & 59.4 & 59.4 \\
     \bottomrule
   \end{tabularx}
 \end{LabRecordTable}
@@ -168,31 +169,142 @@
     \toprule
     $t$/s & 30 & 60 & 90 & 120 & 150 & 180 & 210 & 240 & 270 & 300 \\
     \midrule
-    $T_2$/\si{\celsius} & & & & & & & & & & \\
+    $T_2$/\si{\celsius} & 68.4 & 66.9 & 65.6 & 64.2 & 63.0 & 61.7 & 60.6 & 59.5 & 58.5 & 57.5 \\
     \midrule
     $t$/s & 330 & 360 & 390 & 420 & 450 & 480 & 510 & 540 & 570 & 600 \\
     \midrule
-    $T_2$/\si{\celsius} & & & & & & & & & & \\
+    $T_2$/\si{\celsius} & 56.5 & 55.6 & 54.6 & 54.6 & 53.7 & 52.8 & 51.2 & 50.4 & 49.7 & 49.1 \\
     \bottomrule
   \end{tabularx}
 \end{LabRecordTable}
 
 \section{数据处理}
-\begin{enumerate}[label=\arabic*. ]
-  \item 由表 \ref{table:steady} 中的数据求加热盘与散热盘的稳态温度 $T_1$、$T_2$；如有需要，可先进行离群值检查后再取平均值。
-  \item 由表 \ref{table:cooling} 中数据作散热盘的 $T$-$t$ 冷却曲线，在 $T=T_2$ 附近取切线，求出冷却速率 $\left.\frac{\mathrm{d}T}{\mathrm{d}t}\right|_{T=T_2}$。
-  \item 将 $m$、$R_P$、$h_P$、$R_B$、$h_B$、$T_1$、$T_2$ 及冷却速率代入导热系数公式，计算样品导热系数 $\lambda$。
-  \item 完成阶段可根据计算结果与材料常见导热系数范围进行比较，并结合稳态建立情况、接触热阻、环境散热和斜率读取误差讨论实验偏差来源。
-\end{enumerate}
+\subsection{稳态温度}
+表 \ref{table:steady} 中记录值变化平缓，未见明显离群点，因此直接取平均值作为稳态温度。由
+\[
+  \overline{T_1}
+  =
+  \frac{1}{10}\sum_{i=1}^{10} T_{1i}
+  =
+  \frac{79.6\times 4 + 79.5\times 6}{10}
+  =
+  79.54\,^{\circ}\mathrm{C},
+\]
+\[
+  \overline{T_2}
+  =
+  \frac{1}{10}\sum_{i=1}^{10} T_{2i}
+  =
+  \frac{588.0}{10}
+  =
+  58.80\,^{\circ}\mathrm{C}
+\]
+可得稳态温差
+\[
+  \Delta T = \overline{T_1} - \overline{T_2} = 20.74\,^{\circ}\mathrm{C}.
+\]
+
+\subsection{冷却曲线与冷却速率}
+根据表 \ref{table:cooling} 中的自然冷却数据作散热盘冷却曲线，如图 \ref{fig:cooling-fit} 所示。对全部冷却数据采用经验函数
+\[
+  T = \frac{a}{t+b}+c
+\]
+进行曲线拟合，得到
+\[
+  T
+  =
+  \frac{8.779\times 10^4}{t+1331.56} + 3.789,
+  \qquad
+  R^2 = 0.9976.
+\]
+其导函数为
+\[
+  \frac{\mathrm{d}T}{\mathrm{d}t}
+  =
+  -\frac{8.779\times 10^4}{(t+1331.56)^2}.
+\]
+当 $T=\overline{T_2}=58.80\,^{\circ}\mathrm{C}$ 时，由上式可解得
+\[
+  t = \frac{8.779\times 10^4}{58.80-3.789} - 1331.56 = 264.24\,\mathrm{s}.
+\]
+将该时刻代入导函数，得到稳态温度附近的冷却速率
+\[
+  \left.\frac{\mathrm{d}T}{\mathrm{d}t}\right|_{T=\overline{T_2}}
+  =
+  -0.03447\,^{\circ}\mathrm{C}\,\mathrm{s}^{-1}.
+\]
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.82\textwidth,
+      height=0.52\textwidth,
+      xlabel={$t \,/\, \mathrm{s}$},
+      ylabel={$T_2 \,/\, ^{\circ}\mathrm{C}$},
+      xmin=0, xmax=630,
+      ymin=48, ymax=70,
+      grid=both,
+      tick label style={font=\small},
+      label style={font=\small},
+      legend style={font=\small, at={(0.97,0.97)}, anchor=north east}
+    ]
+      \addplot[only marks, mark=*, blue] coordinates {
+        (30,68.4) (60,66.9) (90,65.6) (120,64.2) (150,63.0)
+        (180,61.7) (210,60.6) (240,59.5) (270,58.5) (300,57.5)
+        (330,56.5) (360,55.6) (390,54.6) (420,54.6) (450,53.7)
+        (480,52.8) (510,51.2) (540,50.4) (570,49.7) (600,49.1)
+      };
+      \addlegendentry{实验数据}
+      \addplot[red, domain=30:600, samples=200] {87790/(x + 1331.56) + 3.789};
+      \addlegendentry{全数据曲线拟合}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{散热盘自然冷却曲线及全数据拟合结果}
+  \label{fig:cooling-fit}
+\end{figure}
+
+\subsection{导热系数计算}
+将
+\[
+  m = 0.823\,\mathrm{kg},\quad
+  h_P = 0.007\,\mathrm{m},\quad
+  h_B = 0.005\,\mathrm{m},\quad
+  R_P = R_B = 0.065\,\mathrm{m},
+\]
+\[
+  c = 385\,\mathrm{J\,kg^{-1}\,^{\circ}C^{-1}},\quad
+  \Delta T = 20.74\,^{\circ}\mathrm{C},\quad
+  \left.\frac{\mathrm{d}T}{\mathrm{d}t}\right|_{T=\overline{T_2}}
+  =
+  -0.03447\,^{\circ}\mathrm{C}\,\mathrm{s}^{-1}
+\]
+代入导热系数公式，得
+\[
+  \lambda
+  =
+  -0.823 \times 385
+  \times \frac{0.065 + 2\times 0.007}{2\times 0.065 + 2\times 0.007}
+  \times \frac{1}{\pi \times (0.065)^2}
+  \times \frac{0.005}{20.74}
+  \times (-0.03447),
+\]
+\[
+  \lambda = 0.109\,\mathrm{W\,m^{-1}\,K^{-1}}.
+\]
+该结果处于非良导体常见的 $10^{-1}\,\mathrm{W\,m^{-1}\,K^{-1}}$ 量级，说明待测硅橡胶样品导热性能较弱，具有较好的隔热特征。
 
 \section{实验的分析和总结}
-完成阶段补充以下内容：
 \begin{enumerate}[label=\arabic*. ]
-  \item 根据实测数据给出导热系数计算结果，并说明其物理意义；
-  \item 结合稳态法和参量转换法，分析本实验设计的关键思路；
-  \item 讨论样品与铜盘接触情况、温度稳定程度、环境散热和冷却曲线斜率选取对结果的影响。
+  \item 由实测数据计算得样品导热系数
+  \[
+    \lambda = 0.109\,\mathrm{W\,m^{-1}\,K^{-1}},
+  \]
+  表明该样品属于导热性能较差的非良导体，热量通过其厚度方向传递较慢，作为隔热材料是合理的。
+  \item 本实验的关键设计是先用稳态法在样品两侧建立稳定温差，通过测得 $T_1$、$T_2$ 和样品几何尺寸确定温度梯度；再利用参量转换法，把难以直接测量的传热速率转化为散热盘在同一温度附近的冷却速率，从而将导热系数测量化为温度和时间的测量。
+  \item 实验误差主要来自以下几方面：一是稳态测温阶段中 $T_2$ 仍有缓慢上升，说明系统虽已接近稳态但未达到理想静止状态，这会使最终结果偏小；二是样品与铜盘之间若存在接触不紧密或接触热阻，会增大测得的温差，从而低估导热系数；三是冷却曲线虽然采用了全数据拟合，但拟合模型的选取、温度读数分辨率以及环境对流条件变化仍会影响在 $\overline{T_2}$ 处求得的导数，从而带来一定系统误差。
 \end{enumerate}
 
-\insertRawDataPage
+\insertSignedDataPage
 
 \end{document}
