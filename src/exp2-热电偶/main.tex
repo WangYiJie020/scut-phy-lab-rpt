@@ -1,5 +1,18 @@
 \documentclass{../template/myrpt}
 \ExamName{热电偶的定标实验}
+\newlist{experimentsteps}{enumerate}{1}
+\setlist[experimentsteps,1]{
+  label=\textbf{\arabic*.},
+  leftmargin=0pt,
+  labelsep=0pt,
+  itemindent=0pt,
+  align=left,
+  topsep=0pt,
+  partopsep=0pt,
+  parsep=0pt,
+  itemsep=0.75\baselineskip
+}
+\pgfplotsset{compat=1.18}
 
 \begin{document}
 \maketitle
@@ -61,15 +74,13 @@
 
 \section{实验内容和步骤}
 
-\noindent\textbf{1.} 按图示组装好仪器，连接热学综合实验平台、热电偶传感器、毫伏测量端口和冷端保温杯，检查无误后打开实验平台电源。
-
-\noindent\textbf{2.} 在平台界面上，点击“实验目录”，选择“温差热电偶定标实验”，再从右侧“热学实验组件”中拖出控温器、毫伏表和图像模块。
-
-\noindent\textbf{3.} 调节控温器“设置温度”为 $40\,^{\circ}\mathrm{C}$，点击“确定”完成设定。待系统加热到设定温度并稳定后，点击数据记录表格下方的“记录”按钮，将毫伏表读数记录到表 \ref{table:calibration} 中。
-
-\noindent\textbf{4.} 重复步骤 3，依次将设定温度调整为 $50\,^{\circ}\mathrm{C}$、$60\,^{\circ}\mathrm{C}$、$70\,^{\circ}\mathrm{C}$、$80\,^{\circ}\mathrm{C}$、$90\,^{\circ}\mathrm{C}$ 和 $100\,^{\circ}\mathrm{C}$，在冷端条件保持不变的情况下，记录各温度点对应的热电动势。
-
-\noindent\textbf{5.} 点击平台上的“作图”按钮，观察热电偶的 $E(T)$--$T$ 定标曲线。完成阶段再根据保存的数据整理图线、进行拟合并补充分析。
+\begin{experimentsteps}
+  \item 按图示组装好仪器，连接热学综合实验平台、热电偶传感器、毫伏测量端口和冷端保温杯，检查无误后打开实验平台电源。
+  \item 在平台界面上，点击“实验目录”，选择“温差热电偶定标实验”，再从右侧“热学实验组件”中拖出控温器、毫伏表和图像模块。
+  \item 调节控温器“设置温度”为 $40\,^{\circ}\mathrm{C}$，点击“确定”完成设定。待系统加热到设定温度并稳定后，点击数据记录表格下方的“记录”按钮，将毫伏表读数记录到表 \ref{table:calibration} 中。
+  \item 重复步骤 3，依次将设定温度调整为 $50\,^{\circ}\mathrm{C}$、$60\,^{\circ}\mathrm{C}$、$70\,^{\circ}\mathrm{C}$、$80\,^{\circ}\mathrm{C}$、$90\,^{\circ}\mathrm{C}$ 和 $100\,^{\circ}\mathrm{C}$，在冷端条件保持不变的情况下，记录各温度点对应的热电动势。
+  \item 点击平台上的“作图”按钮，观察热电偶的 $E(T)$--$T$ 定标曲线。完成阶段再根据保存的数据整理图线、进行拟合并补充分析。
+\end{experimentsteps}
 
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 
@@ -83,20 +94,93 @@
     \toprule
     温度 $T$/\si{\celsius} & 40 & 50 & 60 & 70 & 80 & 90 & 100 \\
     \midrule
-    电动势 $E(T)$/\si{\milli\volt} & & & & & & & \\
+    电动势 $E(T)$/\si{\milli\volt} & 1.2 & 1.4 & 1.7 & 2.0 & 2.3 & 2.6 & 2.8 \\
     \bottomrule
   \end{tabularx}
 \end{LabRecordTable}
 
-\section{实验的总结和分析}
-完成阶段补充以下内容：
-\begin{enumerate}[label=\arabic*. ]
-  \item 根据表 \ref{table:calibration} 中记录的数据绘制热电偶的 $E(T)$--$T$ 定标曲线，并给出拟合方程；
-  \item 分析实验所得电动势与温度之间的关系，说明该热电偶在本实验温区内的线性程度；
-  \item 讨论冷端温度、温度稳定程度、读数误差和接触情况等因素对定标结果的影响；
-  \item 若冷端不处于冰水混合物中，说明如何利用冷端补偿思想修正测量结果。
-\end{enumerate}
+\section{实验数据处理}
 
-\insertRawDataPage
+根据表 \ref{table:calibration} 中的数据，以温度 $T$ 为横轴、热电动势 $E(T)$ 为纵轴作出热电偶的定标曲线，如图 \ref{fig:calibration} 所示。
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.82\textwidth,
+      height=0.52\textwidth,
+      xlabel={$T / \si{\celsius}$},
+      ylabel={$E(T) / \si{\milli\volt}$},
+      xmin=38, xmax=102,
+      ymin=1.1, ymax=2.9,
+      xtick={40,50,60,70,80,90,100},
+      ytick={1.2,1.4,1.6,1.8,2.0,2.2,2.4,2.6,2.8},
+      grid=both,
+      tick label style={font=\small},
+      label style={font=\small},
+      legend style={font=\small, at={(0.5,-0.16)}, anchor=north, fill=white, draw=none},
+      clip=false
+    ]
+      \addplot[only marks, mark=*, blue] coordinates {
+        (40,1.2) (50,1.4) (60,1.7) (70,2.0) (80,2.3) (90,2.6) (100,2.8)
+      };
+      \addlegendentry{实验数据}
+      \addplot[red, domain=40:100, samples=2] {0.027857142857*x + 0.05};
+      \addlegendentry{线性拟合}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{热电偶 $E(T)$--$T$ 定标曲线}
+  \label{fig:calibration}
+\end{figure}
+
+采用最小二乘法进行线性拟合，可得该热电偶在本实验温区内的定标方程为
+\[
+  E(T) = 0.02786T + 0.05000,
+\]
+其中 $E$ 的单位为 \si{\milli\volt}，$T$ 的单位为 \si{\celsius}。拟合的决定系数为
+\[
+  R^2 = 0.9967,
+\]
+线性相关系数为
+\[
+  r = 0.9984.
+\]
+由此可见，在 $40\,^{\circ}\mathrm{C}$ 至 $100\,^{\circ}\mathrm{C}$ 的实验范围内，热电动势与温度呈显著线性正相关关系。由拟合直线斜率可得该热电偶在本实验条件下的灵敏度约为
+\[
+  c = 0.02786\ \si{\milli\volt\per\celsius}
+  = 27.86\ \si{\micro\volt\per\celsius}.
+\]
+
+若以后需要由电动势反推出温度，可将上式改写为
+\[
+  T = 35.897E - 1.795,
+\]
+其中 $E$ 的单位仍取 \si{\milli\volt}。该式可作为本实验所用热电偶在相同冷端条件下的近似定标公式。
+
+\section{实验的分析和总结}
+
+由图 \ref{fig:calibration} 可见，实测点基本分布在同一直线附近，且电动势随温度升高单调增大，说明该热电偶在本实验温区内满足较好的线性响应规律。平均来看，温度每升高 $10\,^{\circ}\mathrm{C}$，热电动势约增加 $0.279\,\si{\milli\volt}$。拟合截距仅为 $0.050\,\si{\milli\volt}$，相对于实验测得的 $1.2$--$2.8\,\si{\milli\volt}$ 而言较小，表明定标曲线与理想情况下过原点的线性关系较为接近。
+
+本实验的误差主要可能来自以下几个方面。首先，冷端虽然置于冰水混合物中，但其温度未必始终严格保持在 $0\,^{\circ}\mathrm{C}$，冷端温度的微小漂移会直接影响热电动势读数。其次，各设定温度点若尚未完全稳定就读取毫伏表，热端实际温度与设定温度之间可能存在偏差。再次，毫伏表分辨率、人工记录时的读数误差以及热电偶与加热井、引线端接触不良，都可能使某些数据点相对拟合直线产生轻微偏离。此外，环境散热和导线附加热电势也会带来一定系统误差。
+
+若冷端不处于冰水混合物中，而是位于实际温度 $T_0$，则实测电动势记为 $E_{\mathrm{m}}$，它反映的是热端与冷端之间的温差效应。根据冷端补偿思想，应先求出冷端温度对应的补偿电动势
+\[
+  E(T_0,0) = 0.02786T_0 + 0.05000,
+\]
+再与实测值相加，得到相对于 $0\,^{\circ}\mathrm{C}$ 冷端的等效电动势
+\[
+  E_{\mathrm{c}} = E_{\mathrm{m}} + E(T_0,0).
+\]
+随后代入定标方程
+\[
+  T = 35.897E_{\mathrm{c}} - 1.795
+\]
+即可求出热端温度。若仍采用本实验得到的线性近似，则上式可进一步化简为
+\[
+  T \approx 35.897E_{\mathrm{m}} + T_0.
+\]
+因此，冷端补偿的本质是把非 $0\,^{\circ}\mathrm{C}$ 冷端造成的缺失电动势补回去，再利用定标曲线反算热端温度。
+
+\insertSignedDataPage
 
 \end{document}
