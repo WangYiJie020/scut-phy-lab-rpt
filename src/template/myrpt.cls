@@ -82,19 +82,22 @@
 % 汇总输出单条记录
 \cs_new_protected:Nn \__exp_record_print_saved:nnn
   {
-    \begin{table}[htbp]
+    \par
+    \noindent
+    \begin{minipage}{\linewidth}
       \centering
-      % 先输出“汇总标题”
+      \captionsetup{type=table}
       \tl_if_blank:nTF {#1}
         {
-          \caption*{#2}
+          \captionof*{table}{#2}
         }
         {
-          \caption*{表~\ref{#1}：#2}
+          \captionof*{table}{表~\ref{#1}：#2}
         }
-      % 再输出表体，但不再执行原来的 \caption/\label
       \__exp_record_replay_body:n {#3}
-    \end{table}
+    \end{minipage}
+    \par
+    \vspace{0.5\baselineskip}
   }
 
 % 主环境：正文里正常写 \caption 和 \label
@@ -144,12 +147,15 @@
 % 文末统一打印
 \NewDocumentCommand{\PrintAllLabRecordTables}{}
   {
-    % \clearpage
-    % \section*{实验填写表汇总}
-    \seq_map_inline:Nn \g__exp_record_table_seq
-      {
-        ##1
-      }
+    \group_begin:
+      \setlength{\abovecaptionskip}{2pt}
+      \setlength{\belowcaptionskip}{4pt}
+      \setlength{\parskip}{0pt}
+      \seq_map_inline:Nn \g__exp_record_table_seq
+        {
+          ##1
+        }
+    \group_end:
   }
 
 \ExplSyntaxOff
