@@ -1,10 +1,19 @@
 \documentclass{../template/myrpt}
 \ExamName{数字示波器的调整和应用}
 
+\usepackage[export]{adjustbox}
+
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
-\newcommand{\imagecell}[1]{\parbox[c][#1][c]{\linewidth}{\centering\strut}}
-\newcommand{\imagehead}[2]{\parbox[c][#1][c]{\linewidth}{\centering #2}}
+% \newcommand{\rowhead}[2]{\parbox[c][#1][c]{\linewidth}{\centering #2}}
+\newcommand{\rowhead}[2]{#2}
+\newcommand{\waveimg}[2]{%
+  % 使用 minipage 强制高度与传入参数 #1 一致
+  \begin{minipage}[c][#1][c]{\linewidth}
+    \centering
+    \includegraphics[width=\linewidth,height=#1,keepaspectratio]{data/wave_img/#2}%
+  \end{minipage}
+}
 \pgfplotsset{compat=1.18}
 
 \begin{document}
@@ -16,7 +25,7 @@
   \item 掌握数字示波器显示波形、光标测量和菜单自动测量的方法；
   \item 学习使用函数发生器输出不同频率、幅值和形状的周期信号；
   \item 学会利用李萨如图形测量未知信号频率；
-  \item 观察数字示波器数学运算功能对双通道信号的处理效果。
+  \item 观察数字示波器加法运算功能对双通道信号的处理效果。
 \end{enumerate}
 
 \section{实验仪器}
@@ -39,9 +48,9 @@
 \[
   f = \frac{1}{T}.
 \]
-若信号的最大值和最小值分别为 $U_{\max}$ 和 $U_{\min}$，则峰峰值为
+若信号的最大值和最小值分别为 $V_{\max}$ 和 $U_{\min}$，则峰峰值为
 \[
-  U_{\mathrm{pp}} = U_{\max} - U_{\min}.
+  V_{\mathrm{pp}} = U_{\max} - U_{\min}.
 \]
 光标测量直观、便于理解，但会受到人工定位和读数的影响；自动测量操作快速、重复性较好，但结果依赖示波器采样、触发和内部识别算法。
 
@@ -49,26 +58,22 @@
 
 当数字示波器工作在 $X$-$Y$ 显示方式时，若将一路正弦信号接入 $X$ 方向、另一路正弦信号接入 $Y$ 方向，屏幕上会显示由两路信号合成的李萨如图形。若两路信号频率成简单整数比，图形将呈稳定闭合曲线；若频率比不是简单整数比，图形会不断变化而难以稳定。
 
-设 $f_x$ 为接入 $X$ 方向的信号频率，$f_y$ 为接入 $Y$ 方向的信号频率。若稳定李萨如图形与水平外切线的切点数为 $n_x$，与竖直外切线的切点数为 $n_y$，则有
+设 $f_x$ 为接入 $X$ 方向的信号频率，$f_y$ 为接入 $Y$ 方向的信号频率。本次按示波器截图中的频率比记录李萨如图形，并把比值写作 $n_y:n_x$，则有
 \[
-  \frac{f_y}{f_x} = \frac{n_x}{n_y}.
+  \frac{f_y}{f_x} = \frac{n_y}{n_x}.
 \]
-因此，在已知 $f_x$ 的情况下，通过调节或判读稳定图形对应的 $n_x:n_y$，即可求出待测信号频率
+因此，在已知 $f_x$ 的情况下，通过调节或判读稳定图形对应的比值，即可求出待测信号频率
 \[
-  f_y = \frac{n_x}{n_y} f_x.
+  f_y = \frac{n_y}{n_x} f_x.
 \]
 
 \subsection{数字示波器的数学运算}
 
-数字示波器采集到两路信号后，可在内部对采样数据进行数学运算，例如通道相加、相减、相乘等。设两通道信号分别为 $u_1(t)$ 和 $u_2(t)$，加法运算显示
+数字示波器采集到两路信号后，可在内部对采样数据进行数学运算。设两通道信号分别为 $u_1(t)$ 和 $u_2(t)$，加法运算显示
 \[
   u_+(t)=u_1(t)+u_2(t),
 \]
-乘法运算显示
-\[
-  u_\times(t)=u_1(t)u_2(t).
-\]
-通过观察运算波形，可以直观理解双通道信号叠加、调制或乘积变化的特点。
+通过观察运算波形，可以直观理解双通道信号叠加后的变化特点。
 
 \section{实验内容和步骤}
 
@@ -76,7 +81,7 @@
 
 \begin{enumerate}[label=\arabic*)]
   \item 将函数发生器 CH1 端输出信号接入数字示波器 CH1 通道，检查探头、接地端和通道设置。
-  \item 分别调出正弦波、三角波和方波，使示波器稳定显示波形，并记录波形图与波形名称。
+  \item 分别调出正弦波、方波和三角波，使示波器稳定显示波形，并记录波形图与波形名称。
   \item 将函数发生器设置为 $100\,\si{\hertz}$ 的正弦波，使用示波器光标功能测量峰峰值、周期和频率，并记录测量图与结果。
   \item 对同一个 $100\,\si{\hertz}$ 正弦波使用菜单自动测量功能，记录峰峰值、周期和频率。
   \item 比较光标测量与自动测量结果的差异，完成阶段再根据实测数据进行分析。
@@ -92,8 +97,14 @@
     \toprule
     项目 & 波形一 & 波形二 & 波形三 \\
     \midrule
-    \imagehead{3.2cm}{波形图} & \imagecell{3.2cm} & \imagecell{3.2cm} & \imagecell{3.2cm} \\
-    波形名称 &  &  &  \\
+    \rowhead{3.1cm}{波形图} &
+    \waveimg{3.2cm}{wave1-sine.png} &
+    \waveimg{3.2cm}{wave2-square.png} &
+    \waveimg{3.2cm}{wave3-ramp.png} \\
+    波形名称 & 正弦波 & 方波 & 三角波 \\
+    示波器读数 & $f=100.0\,\si{\hertz}$，$T=10.00\,\si{\milli\second}$ &
+    $f=100.0\,\si{\hertz}$，$T=10.00\,\si{\milli\second}$ &
+    $f=99.80\,\si{\hertz}$，$T=10.02\,\si{\milli\second}$ \\
     \bottomrule
   \end{tabularx}
 \end{LabRecordTable}
@@ -108,8 +119,8 @@
     \toprule
     项目 & 记录内容 \\
     \midrule
-    \imagehead{4.2cm}{测量图} & \imagecell{4.2cm} \\
-    测量结果 & 峰峰值：\hspace{3cm} 周期：\hspace{3cm} 频率： \\
+    \rowhead{5.2cm}{测量图} & \waveimg{5.2cm}{cursor-masure.png} \\
+	测量结果 & $V_{pp}=\Delta U=5.00\,\si{\volt}$；$T=\Delta t=10.00\,\si{\milli\second}$；$f=1/\Delta t=100.0\,\si{\hertz}$ \\
     \bottomrule
   \end{tabularx}
 \end{LabRecordTable}
@@ -124,8 +135,8 @@
     \toprule
     项目 & 记录内容 \\
     \midrule
-    \imagehead{4.2cm}{测量图} & \imagecell{4.2cm} \\
-    测量结果 & 峰峰值：\hspace{3cm} 周期：\hspace{3cm} 频率： \\
+    \rowhead{5.2cm}{测量图} & \waveimg{5.2cm}{auto.jpg} \\
+    测量结果 & $V_{\mathrm{pp}}=5.00\,\si{\volt}$；$T=10.00\,\si{\milli\second}$；$f=100.0\,\si{\hertz}$ \\
     \bottomrule
   \end{tabularx}
 \end{LabRecordTable}
@@ -134,8 +145,8 @@
 
 \begin{enumerate}[label=\arabic*)]
   \item 将函数发生器一路输出接入示波器 CH1 通道，作为 $X$ 方向信号；将另一路输出接入示波器 CH2 通道，作为 $Y$ 方向待测信号。
-  \item 设置待测信号为一定频率的正弦信号，调节已知信号频率 $f_x$，使屏幕分别出现 $n_x:n_y=1:1$、$2:1$、$3:1$、$3:2$ 的稳定李萨如图形。
-  \item 对每一种稳定图形拍照或记录，填写对应的 $f_x$、$f_y$，并由 $f_y=(n_x/n_y)f_x$ 计算待测频率。
+  \item 设置待测信号为一定频率的正弦信号，调节已知信号频率 $f_x$，使屏幕分别出现 $n_y:n_x=1:1$、$1:2$、$1:3$、$2:3$ 的稳定李萨如图形。
+  \item 对每一种稳定图形拍照或记录，填写对应的 $f_x$、$f_y$，并由 $f_y=(n_y/n_x)f_x$ 计算待测频率。
 \end{enumerate}
 
 \begin{LabRecordTable}
@@ -146,11 +157,15 @@
   \setlength{\tabcolsep}{3pt}
   \begin{tabularx}{\textwidth}{C{2cm} *{4}{Y}}
     \toprule
-    $n_x:n_y$ & $1:1$ & $2:1$ & $3:1$ & $3:2$ \\
+    $n_y:n_x$ & $1:1$ & $1:2$ & $1:3$ & $2:3$ \\
     \midrule
-    \imagehead{3cm}{图形} & \imagecell{3cm} & \imagecell{3cm} & \imagecell{3cm} & \imagecell{3cm} \\
-    $f_x/\si{\hertz}$ &  &  &  &  \\
-    $f_y/\si{\hertz}$ &  &  &  &  \\
+    \rowhead{3cm}{图形} &
+    \waveimg{3cm}{x1y1.png} &
+    \waveimg{3cm}{x1y2.png} &
+    \waveimg{3cm}{x1y3.png} &
+    \waveimg{3cm}{x2y3.png} \\
+    $f_x/\si{\hertz}$ & 205.0 & 410.0 & 615.0 & 307.5 \\
+    $f_y/\si{\hertz}$ & 205.0 & 205.0 & 205.0 & 205.0 \\
     \bottomrule
   \end{tabularx}
 \end{LabRecordTable}
@@ -160,8 +175,7 @@
 \begin{enumerate}[label=\arabic*)]
   \item 设置函数发生器两路输出信号，将两路信号分别接入示波器 CH1 和 CH2 通道。
   \item 打开示波器数学运算功能，选择 CH1+CH2，调节显示比例并记录运算波形。
-  \item 改变两路信号参数，选择 CH1*CH2，调节显示比例并记录运算波形。
-  \item 比较两种数学运算波形与原始双通道波形的关系。
+  \item 比较加法运算波形与原始双通道波形的关系。
 \end{enumerate}
 
 \begin{LabRecordTable}
@@ -170,25 +184,65 @@
   \label{table:math-operation}
   \renewcommand{\arraystretch}{1.25}
   \setlength{\tabcolsep}{4pt}
-  \begin{tabularx}{\textwidth}{C{2.4cm} Y Y}
+  \begin{tabularx}{\textwidth}{C{2.4cm} Y}
     \toprule
-    项目 & CH1+CH2 & CH1*CH2 \\
+    项目 & CH1+CH2 \\
     \midrule
-    \imagehead{4cm}{运算图} & \imagecell{4cm} & \imagecell{4cm} \\
-    信号设置 &  &  \\
-    波形特征 &  &  \\
+    \rowhead{5.2cm}{运算图} & \waveimg{5.2cm}{mathadd.png} \\
+    信号设置 & CH1：$1.00\,\si{\kilo\hertz}$ 正弦信号；CH2：同频正弦信号 \\
+    波形特征 & 红色数学波形为两路同相正弦波叠加，幅值大于单通道波形 \\
     \bottomrule
   \end{tabularx}
 \end{LabRecordTable}
 
 \section{实验数据处理}
 
-本报告处于准备阶段，待完成实验并确认原始数据后，再根据表 \ref{table:cursor-measure}、表 \ref{table:auto-measure}、表 \ref{table:lissajous} 和表 \ref{table:math-operation} 中的数据补充计算过程、结果比较和误差分析。
+\subsection{函数发生器输出波形}
+
+由表 \ref{table:waveforms} 可见，函数发生器输出的正弦波、方波和三角波均能在数字示波器上稳定显示。正弦波和方波的自动读数均为
+\[
+  f=100.0\,\si{\hertz},\qquad T=10.00\,\si{\milli\second},
+\]
+满足 $T=1/f$。三角波截图读数为 $f=99.80\,\si{\hertz}$、$T=10.02\,\si{\milli\second}$，与 $100\,\si{\hertz}$ 的设定值接近。
+
+\subsection{光标测量与自动测量比较}
+
+对 $100\,\si{\hertz}$ 正弦波，光标测量结果为
+\[
+  \Delta U=5.00\,\si{\volt},\qquad
+  \Delta t=10.00\,\si{\milli\second},\qquad
+  f=\frac{1}{\Delta t}=100.0\,\si{\hertz}.
+\]
+自动测量结果为
+\[
+  V_{\mathrm{pp}}=5.00\,\si{\volt},\qquad
+  T=10.00\,\si{\milli\second},\qquad
+  f=100.0\,\si{\hertz}.
+\]
+两种方法得到的周期、频率和峰峰值一致，说明在波形稳定、触发设置合适的条件下，光标测量和自动测量均能给出可靠结果。
+
+\subsection{李萨如图形测频率}
+
+李萨如图形数据按本次要求以 $n_y:n_x$ 标记。截图中 CH1 作为 $X$ 方向信号，CH2 作为 $Y$ 方向信号，读得 $f_y$ 基本保持在 $205.0\,\si{\hertz}$，而 $f_x$ 分别为 $205.0\,\si{\hertz}$、$410.0\,\si{\hertz}$、$615.0\,\si{\hertz}$ 和 $307.5\,\si{\hertz}$。因此频率比为
+\[
+  f_y:f_x = 1:1,\quad 1:2,\quad 1:3,\quad 2:3,
+\]
+与表 \ref{table:lissajous} 中稳定闭合图形的标记一致。实验表明，当两路正弦信号频率成简单整数比时，示波器 $X$-$Y$ 模式下可以形成稳定的李萨如图形。
+
+\subsection{数学运算波形}
+
+数学运算截图显示 CH1 与 CH2 的正弦信号叠加后，红色数学波形仍为正弦形，幅值明显大于单通道波形，符合
+\[
+  u_+(t)=u_1(t)+u_2(t)
+\]
+的叠加规律。
 
 \section{实验的分析和总结}
 
-本报告处于准备阶段，待完成实验并确认原始数据后，再结合实际波形、测量结果和李萨如图形记录完成分析和总结。
+本实验完成了数字示波器显示波形、光标测量、自动测量、李萨如图形观察和数学运算功能的练习。实验中，示波器能够稳定显示不同类型的周期信号；对于 $100\,\si{\hertz}$ 正弦波，光标测量与自动测量得到的周期、频率和峰峰值一致，说明在合适触发条件下两种测量方式均较可靠。
 
-\insertRawDataPage
+误差主要来自人工调节和读数、触发电平设置、函数发生器输出与示波器采样显示的有限分辨率等因素。光标测量需要手动定位光标，若光标未准确落在相邻峰值或对应相位点上，会引入人为误差；自动测量依赖示波器内部算法，波形噪声或显示周期数不足时也会影响读数。实验时应先调节触发使波形稳定，再适当选择时基和垂直灵敏度，使待测波形占据较多有效格数，以提高读数可靠性。
+
+\insertSignedDataPage
 
 \end{document}
