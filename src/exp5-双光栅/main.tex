@@ -1,0 +1,142 @@
+\documentclass{../template/myrpt}
+\ExamName{双光栅测量微弱振动位移}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+\pgfplotsset{compat=1.18}
+
+\begin{document}
+\maketitle
+
+\section{实验目的}
+\begin{enumerate}[label=\arabic*. ]
+  \item 了解利用光的多普勒频移形成光拍的原理；
+  \item 了解精确测量微弱振动位移的一种方法；
+  \item 应用双光栅微弱振动测量仪测量音叉振动的微振幅。
+\end{enumerate}
+
+\section{实验仪器}
+
+本实验使用的主要仪器为双光栅微弱振动测量仪和示波器。双光栅微弱振动测量仪由半导体激光器、静光栅、与音叉相连的动光栅、光电接收器、驱动与检测电路等部分组成。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.72\linewidth]{assets/media/image1.png}
+  \caption{双光栅微弱振动测量仪}
+\end{figure}
+
+\section{实验原理}
+
+\subsection{移动光学相位光栅的多普勒频移}
+
+当光源和接收器之间存在相对运动时，接收器接收到的光频率会相对于光源频率发生变化，这种现象称为多普勒效应。若把光栅固定在振动音叉上，光栅随音叉作微小周期运动，入射激光经移动光栅衍射后会产生与光栅速度有关的多普勒频移。
+
+设光栅常数为 $d$，光栅相对入射光束的瞬时速度为 $v$。对于同一级衍射光，多普勒频移量可写成
+\[
+  f_D = \frac{v}{d}.
+\]
+由此可见，在光栅常数一定时，多普勒频移只与移动光栅的瞬时速度有关，而与光源本身的光频无关。
+
+\subsection{光拍的获得与检测}
+
+光频本身很高，普通电子仪器难以直接测量光频的微小变化。实验中让已发生频移的衍射光与未发生频移或频移不同的光束平行叠加，两束光的频率差会形成光拍。光电接收器具有平方律检波特性，可把光强随时间的变化转换为电信号，示波器上观察到的拍频信号就反映了两束光之间的频率差。
+
+双光栅系统中，一片光栅静止，另一片光栅随音叉振动。激光通过双光栅后，适当选择某一级衍射光进入光电池，就可得到随音叉运动速度变化的光拍信号。调节示波器显示后，可在音叉振动的半个周期 $T/2$ 内计数拍频波形个数。
+
+\subsection{微弱振动位移量的检测}
+
+设音叉带动动光栅沿测量方向作简谐振动
+\[
+  x = A\sin \omega t,
+\]
+则动光栅在半个振动周期内从一个极端位置运动到另一个极端位置，位移变化量为 $2A$。拍频信号的瞬时频率与动光栅速度成正比，在半周期内观察到的拍频波形个数 $n$ 满足
+\[
+  n = \int_0^{T/2} f_D\,\mathrm{d}t
+    = \frac{1}{d}\int_0^{T/2} |v|\,\mathrm{d}t
+    = \frac{2A}{d}.
+\]
+因此音叉微振动的振幅为
+\[
+  A = \frac{nd}{2}.
+\]
+若光栅密度为 $N$，即 $d=1/N$，则
+\[
+  A = \frac{n}{2N}.
+\]
+实验中只要测得半周期内的拍频波形数 $n$，即可计算音叉的微弱振动位移振幅。
+
+\section{实验内容和步骤}
+
+\subsection{仪器连接与光路调节}
+
+\begin{enumerate}[label=\arabic*)]
+  \item 打开双光栅微弱振动测量仪和示波器电源，按仪器要求连接检测信号输出端与示波器输入端。
+  \item 调节激光器固定架的左右调节和上下调节旋钮，使红色激光依次通过静光栅和动光栅。
+  \item 调整光路，使某一级衍射光正好落入光电池前的小孔内，并在示波器上观察到稳定的拍频信号。
+\end{enumerate}
+
+\subsection{测量外力驱动音叉的频率--振幅关系}
+
+\begin{enumerate}[label=\arabic*)]
+  \item 调节频率粗调旋钮，使外力驱动频率约为 $506\,\si{\hertz}$。
+  \item 调节功率旋钮，使驱动电流约为 $40\,\si{\milli\ampere}$。
+  \item 细调驱动频率，使音叉在半周期 $T/2$ 内的拍频波形数最多，此时音叉接近谐振状态。
+  \item 记录谐振频率 $f_{\text{谐}}$。保持驱动功率不变，在谐振频率附近依次改变驱动频率，记录每个频率下 $T/2$ 内的波形数 $n$。
+  \item 根据 $A=nd/2$ 计算音叉振幅，完成表 \ref{table:frequency-amplitude}。完成阶段再根据实测数据绘制频率--振幅曲线。
+\end{enumerate}
+
+\begin{LabRecordTable}
+  \centering
+  \caption{测量外力驱动音叉的频率--振幅关系（功率 $I=$\underline{\hspace{1.0cm}}\,\si{\milli\ampere}）}
+  \label{table:frequency-amplitude}
+  \renewcommand{\arraystretch}{1.35}
+  \setlength{\tabcolsep}{3pt}
+  \small
+  \begin{tabularx}{\textwidth}{C{2.2cm} *{7}{Y}}
+    \toprule
+    频率点 & $f_{\text{谐振}-0.3}$ & $f_{\text{谐振}-0.2}$ & $f_{\text{谐振}-0.1}$ & $f_{\text{谐振}}$ & $f_{\text{谐振}+0.1}$ & $f_{\text{谐振}+0.2}$ & $f_{\text{谐振}+0.3}$ \\
+    \midrule
+    频率 $f$/\si{\hertz} &  &  &  &  &  &  &  \\
+    波形数 $n$/个 &  &  &  &  &  &  &  \\
+    振幅 $A$/\si{\metre} &  &  &  &  &  &  &  \\
+    \bottomrule
+  \end{tabularx}
+\end{LabRecordTable}
+
+\subsection{测量外力驱动音叉的功率--振幅关系}
+
+\begin{enumerate}[label=\arabic*)]
+  \item 将驱动频率保持在音叉谐振频率 $f_{\text{谐}}$ 附近。
+  \item 依次调节功率旋钮，改变外力驱动功率或驱动电流。
+  \item 在每个功率设置下记录半周期 $T/2$ 内的拍频波形数 $n$。
+  \item 根据 $A=nd/2$ 计算音叉振幅，完成表 \ref{table:power-amplitude}。完成阶段再根据实测数据绘制功率--振幅曲线，并分析振幅随功率变化的规律。
+\end{enumerate}
+
+\begin{LabRecordTable}
+  \centering
+  \caption{测量外力驱动音叉的功率--振幅关系}
+  \label{table:power-amplitude}
+  \renewcommand{\arraystretch}{1.35}
+  \setlength{\tabcolsep}{4pt}
+  \small
+  \begin{tabularx}{\textwidth}{C{2.4cm} *{5}{Y}}
+    \toprule
+    功率 $I$/\si{\milli\ampere} & 5 & 15 & 25 & 35 & 45 \\
+    \midrule
+    波形数 $n$/个 &  &  &  &  &  \\
+    振幅 $A$/\si{\metre} &  &  &  &  &  \\
+    \bottomrule
+  \end{tabularx}
+\end{LabRecordTable}
+
+\section{实验数据处理}
+
+本部分待完成实验并获得经确认的原始数据后补充。完成阶段需根据表 \ref{table:frequency-amplitude} 和表 \ref{table:power-amplitude} 中的实测波形数计算振幅，绘制频率--振幅曲线和功率--振幅曲线，并讨论音叉在谐振频率附近的振幅变化规律。
+
+\section{结论和分析}
+
+本部分待完成实验并获得经确认的原始数据后补充。
+
+\insertRawDataPage
+
+\end{document}
