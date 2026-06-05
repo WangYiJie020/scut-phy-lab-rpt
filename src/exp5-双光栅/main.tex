@@ -82,12 +82,12 @@
   \item 调节功率旋钮，使驱动电流约为 $40\,\si{\milli\ampere}$。
   \item 细调驱动频率，使音叉在半周期 $T/2$ 内的拍频波形数最多，此时音叉接近谐振状态。
   \item 记录谐振频率 $f_{\text{谐}}$。保持驱动功率不变，在谐振频率附近依次改变驱动频率，记录每个频率下 $T/2$ 内的波形数 $n$。
-  \item 根据 $A=nd/2$ 计算音叉振幅，完成表 \ref{table:frequency-amplitude}。完成阶段再根据实测数据绘制频率--振幅曲线。
+  \item 根据 $A=nd/2$ 计算音叉振幅，完成表 \ref{table:frequency-amplitude}，并绘制频率--振幅曲线。
 \end{enumerate}
 
 \begin{LabRecordTable}
   \centering
-  \caption{测量外力驱动音叉的频率--振幅关系（功率 $I=$\underline{\hspace{1.0cm}}\,\si{\milli\ampere}）}
+  \caption{测量外力驱动音叉的频率--振幅关系（功率 $I=40\,\si{\milli\ampere}$）}
   \label{table:frequency-amplitude}
   \renewcommand{\arraystretch}{1.35}
   \setlength{\tabcolsep}{3pt}
@@ -96,9 +96,9 @@
     \toprule
     频率点 & $f_{\text{谐振}-0.3}$ & $f_{\text{谐振}-0.2}$ & $f_{\text{谐振}-0.1}$ & $f_{\text{谐振}}$ & $f_{\text{谐振}+0.1}$ & $f_{\text{谐振}+0.2}$ & $f_{\text{谐振}+0.3}$ \\
     \midrule
-    频率 $f$/\si{\hertz} &  &  &  &  &  &  &  \\
-    波形数 $n$/个 &  &  &  &  &  &  &  \\
-    振幅 $A$/\si{\metre} &  &  &  &  &  &  &  \\
+    频率 $f$/\si{\hertz} & 508.700 & 508.800 & 508.900 & 509.000 & 509.100 & 509.200 & 509.300 \\
+    波形数 $n$/个 & 4 & 5 & 9 & 30 & 15 & 7 & 5 \\
+    振幅 $A$/\si{\milli\metre} & 0.020 & 0.025 & 0.045 & 0.150 & 0.075 & 0.035 & 0.025 \\
     \bottomrule
   \end{tabularx}
 \end{LabRecordTable}
@@ -109,7 +109,7 @@
   \item 将驱动频率保持在音叉谐振频率 $f_{\text{谐}}$ 附近。
   \item 依次调节功率旋钮，改变外力驱动功率或驱动电流。
   \item 在每个功率设置下记录半周期 $T/2$ 内的拍频波形数 $n$。
-  \item 根据 $A=nd/2$ 计算音叉振幅，完成表 \ref{table:power-amplitude}。完成阶段再根据实测数据绘制功率--振幅曲线，并分析振幅随功率变化的规律。
+  \item 根据 $A=nd/2$ 计算音叉振幅，完成表 \ref{table:power-amplitude}，绘制功率--振幅曲线，并分析振幅随功率变化的规律。
 \end{enumerate}
 
 \begin{LabRecordTable}
@@ -123,20 +123,127 @@
     \toprule
     功率 $I$/\si{\milli\ampere} & 5 & 15 & 25 & 35 & 45 \\
     \midrule
-    波形数 $n$/个 &  &  &  &  &  \\
-    振幅 $A$/\si{\metre} &  &  &  &  &  \\
+    波形数 $n$/个 & 3 & 15 & 22 & 26 & 29 \\
+    振幅 $A$/\si{\milli\metre} & 0.015 & 0.075 & 0.110 & 0.130 & 0.145 \\
     \bottomrule
   \end{tabularx}
 \end{LabRecordTable}
 
 \section{实验数据处理}
 
-本部分待完成实验并获得经确认的原始数据后补充。完成阶段需根据表 \ref{table:frequency-amplitude} 和表 \ref{table:power-amplitude} 中的实测波形数计算振幅，绘制频率--振幅曲线和功率--振幅曲线，并讨论音叉在谐振频率附近的振幅变化规律。
+本实验所用光栅密度为 $N=100\,\text{条}/\si{\milli\metre}$，光栅常数为
+\[
+  d=\frac{1}{N}=0.010\,\si{\milli\metre}.
+\]
+由微弱振动位移测量公式
+\[
+  A=\frac{nd}{2}=\frac{n}{2N}
+\]
+可得本实验中振幅的计算式为
+\[
+  A=0.005n\,\si{\milli\metre}.
+\]
+例如，在谐振频率 $f_{\text{谐}}=509.000\,\si{\hertz}$ 时，半周期内拍频波形数为 $n=30$，故
+\[
+  A=0.005\times 30=0.150\,\si{\milli\metre}.
+\]
+
+\subsection{频率--振幅关系}
+
+固定驱动功率 $I=40\,\si{\milli\ampere}$，在谐振频率附近改变驱动频率，得到表 \ref{table:frequency-amplitude} 中的数据。由图 \ref{fig:frequency-amplitude} 可见，音叉振幅在 $509.000\,\si{\hertz}$ 附近达到最大值 $0.150\,\si{\milli\metre}$。当频率低于谐振频率时，振幅随频率升高而增大；当频率高于谐振频率时，振幅随频率继续升高而减小。
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.86\linewidth,
+      height=5.4cm,
+      grid=both,
+      xlabel={频率 $f$/\si{\hertz}},
+      ylabel={振幅 $A$/\si{\milli\metre}},
+      xmin=508.65,
+      xmax=509.35,
+      ymin=0,
+      ymax=0.17,
+      xtick={508.7,508.8,508.9,509.0,509.1,509.2,509.3},
+      ytick={0,0.025,0.050,0.075,0.100,0.125,0.150},
+      yticklabels={0,0.025,0.050,0.075,0.100,0.125,0.150},
+      tick label style={font=\small},
+      label style={font=\small},
+      scaled ticks=false,
+    ]
+      \addplot[
+        mark=*,
+        thick,
+        blue,
+      ] coordinates {
+        (508.700,0.020)
+        (508.800,0.025)
+        (508.900,0.045)
+        (509.000,0.150)
+        (509.100,0.075)
+        (509.200,0.035)
+        (509.300,0.025)
+      };
+    \end{axis}
+  \end{tikzpicture}
+  \caption{音叉的频率--振幅关系}
+  \label{fig:frequency-amplitude}
+\end{figure}
+
+\subsection{功率--振幅关系}
+
+保持驱动频率在谐振频率附近，改变驱动电流，得到表 \ref{table:power-amplitude} 中的数据。由图 \ref{fig:power-amplitude} 可见，在本次测量范围内，音叉振幅随驱动电流增大而增大；低电流区间增长较快，较高电流区间增长趋缓。这说明外力驱动增强时输入能量增加，音叉振动更明显，但在接近较大振幅时受阻尼、仪器响应和读数分辨率等因素影响，振幅增量不再严格按相同斜率增加。
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.78\linewidth,
+      height=5.4cm,
+      grid=both,
+      xlabel={功率 $I$/\si{\milli\ampere}},
+      ylabel={振幅 $A$/\si{\milli\metre}},
+      xmin=0,
+      xmax=50,
+      ymin=0,
+      ymax=0.16,
+      xtick={5,15,25,35,45},
+      ytick={0,0.025,0.050,0.075,0.100,0.125,0.150},
+      yticklabels={0,0.025,0.050,0.075,0.100,0.125,0.150},
+      tick label style={font=\small},
+      label style={font=\small},
+      scaled ticks=false,
+    ]
+      \addplot[
+        mark=*,
+        thick,
+        blue,
+      ] coordinates {
+        (5,0.015)
+        (15,0.075)
+        (25,0.110)
+        (35,0.130)
+        (45,0.145)
+      };
+    \end{axis}
+  \end{tikzpicture}
+  \caption{音叉的功率--振幅关系}
+  \label{fig:power-amplitude}
+\end{figure}
 
 \section{结论和分析}
 
-本部分待完成实验并获得经确认的原始数据后补充。
+本实验利用双光栅产生的光拍信号测量音叉的微弱振动位移。实验测得音叉谐振频率为
+\[
+  f_{\text{谐}}=509.000\,\si{\hertz},
+\]
+在 $I=40\,\si{\milli\ampere}$ 时谐振点半周期内波形数为 $30$ 个，对应振幅为 $0.150\,\si{\milli\metre}$。频率--振幅曲线表现出明显的谐振特征：驱动频率接近谐振频率时振幅最大，偏离谐振频率后振幅降低。
 
-\insertRawDataPage
+功率--振幅关系表明，在谐振频率附近，外力驱动电流从 $5\,\si{\milli\ampere}$ 增大到 $45\,\si{\milli\ampere}$ 时，波形数由 $3$ 个增至 $29$ 个，振幅由 $0.015\,\si{\milli\metre}$ 增至 $0.145\,\si{\milli\metre}$。这与外力驱动增强时音叉获得更多能量、振动位移增大的规律一致。
+
+本实验的主要误差来源包括：示波器上拍频波形个数的人工计数误差；谐振频率附近频率调节精度有限；光路未完全调至最佳时会影响光拍信号幅度和清晰度；功率调节和频率读数也受仪器分辨率限制。实验中应使光路稳定、拍频波形清晰，并在谐振点附近细致调节频率，以提高微弱振动位移测量的可靠性。
+
+\insertSignedDataPage
 
 \end{document}
