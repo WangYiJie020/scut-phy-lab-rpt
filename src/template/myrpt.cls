@@ -192,6 +192,21 @@
 	}
 	% \noindent 附件：原始数据
 	\section*{附件：原始数据}
+	\IfFileExists{data/signed_RawRecord_2.jpg}{
+		\clearpage
+		\thispagestyle{empty}
+		\AddToShipoutPicture*{
+			\put(0,0){
+				\parbox[b][\paperheight]{\paperwidth}{
+					\vfill
+					\centering
+					\includegraphics[width=\paperwidth,height=\paperheight]{data/signed_RawRecord_2.jpg}
+					\vfill
+				}
+			}
+		}
+		\null
+	}{}
 }
 
 \date{}

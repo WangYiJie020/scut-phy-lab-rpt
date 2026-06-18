@@ -98,8 +98,7 @@
   \item 将标称值为 $200\,\si{\ohm}$ 的待测电阻 $R_x$ 接入搭建好的电桥。
   \item 取电源电压 $E=5\,\si{\volt}$，并预置电阻箱 $R_0$ 的值。
   \item 调节 $R_0$，使电桥达到平衡，记录对应的 $R_0$ 值。
-  \item 在平衡位置附近微调 $R_0$，使检流计 $G$ 的读数分别为 $-0.1\,\si{\micro\ampere}$ 和 $+0.1\,\si{\micro\ampere}$，记录对应的 $R_0$ 值。
-  \item 将 $R_0$ 与 $R_x$ 交换位置，重复上述调平和微调步骤，记录交换后的 $R_0'$ 及对应读数。
+  \item 将 $R_0$ 与 $R_x$ 交换位置，重复上述调平步骤，记录交换后的 $R_0'$。
 \end{enumerate}
 
 \begin{LabRecordTable}
@@ -116,24 +115,24 @@
     电阻标称值$/\si{\ohm}$ & \multicolumn{4}{c}{$200$} \\
     交换 $R_0$ 与 $R_x$ 的位置分别将电桥调平 & \multicolumn{2}{c}{$R_0/\si{\ohm}$} & \multicolumn{2}{c}{$R_0'/\si{\ohm}$} \\
     \cmidrule(lr){2-3}\cmidrule(lr){4-5}
-    平衡读数 & \multicolumn{2}{c}{\blankcell} & \multicolumn{2}{c}{\blankcell} \\
-    $R_{x\text{测}}=\sqrt{R_0R_0'}$ & \multicolumn{4}{c}{\blankcell} \\
+    平衡读数 & \multicolumn{2}{c}{$213.8$} & \multicolumn{2}{c}{$185.9$} \\
+    $R_{x\text{测}}=\sqrt{R_0R_0'}$ & \multicolumn{4}{c}{$199.36$} \\
     平衡后将检流计 $G$ 调偏 $0.1\,\si{\micro\ampere}$ &
     $G=-0.1\,\si{\micro\ampere}$ 时 $R_0/\si{\ohm}$ &
     $G=+0.1\,\si{\micro\ampere}$ 时 $R_0/\si{\ohm}$ &
     $G=-0.1\,\si{\micro\ampere}$ 时 $R_0'/\si{\ohm}$ &
     $G=+0.1\,\si{\micro\ampere}$ 时 $R_0'/\si{\ohm}$ \\
     调偏读数 & & & & \\
-    $\Delta R_0/\si{\ohm}$ & \multicolumn{4}{c}{\blankcell} \\
-    $\Delta R_x/\si{\ohm}$ & \multicolumn{4}{c}{\blankcell} \\
-    $R_x=R_{x\text{测}}\pm\Delta R_x\,/\si{\ohm}$ & \multicolumn{4}{c}{\blankcell} \\
+    $\Delta R_0/\si{\ohm}$ & \multicolumn{4}{c}{未测调偏数据，未计算} \\
+    $\Delta R_x/\si{\ohm}$ & \multicolumn{4}{c}{未测调偏数据，未计算} \\
+    $R_x=R_{x\text{测}}\pm\Delta R_x\,/\si{\ohm}$ & \multicolumn{4}{c}{$199.36$（未列调偏不确定度）} \\
     \bottomrule
   \end{tabularx}
 \end{LabRecordTable}
 
 \subsection{测量一千欧姆待测电阻}
 
-取标称值为 $1\,\si{\kilo\ohm}$ 的待测电阻 $R_x$，重复上一节中的交换法测量步骤，记录电桥平衡时的 $R_0$、交换后的 $R_0'$，以及两侧 $0.1\,\si{\micro\ampere}$ 调偏对应的电阻箱读数。
+取标称值为 $1\,\si{\kilo\ohm}$ 的待测电阻 $R_x$，重复上一节中的交换法测量步骤，记录电桥平衡时的 $R_0$ 和交换后的 $R_0'$。按本次实验要求，不测量两侧 $0.1\,\si{\micro\ampere}$ 调偏数据。
 
 \begin{LabRecordTable}
   \centering
@@ -149,21 +148,68 @@
     电阻标称值$/\si{\ohm}$ & \multicolumn{4}{c}{$1\,\si{\kilo\ohm}$} \\
     交换 $R_0$ 与 $R_x$ 的位置分别将电桥调平 & \multicolumn{2}{c}{$R_0/\si{\ohm}$} & \multicolumn{2}{c}{$R_0'/\si{\ohm}$} \\
     \cmidrule(lr){2-3}\cmidrule(lr){4-5}
-    平衡读数 & \multicolumn{2}{c}{\blankcell} & \multicolumn{2}{c}{\blankcell} \\
-    $R_{x\text{测}}=\sqrt{R_0R_0'}$ & \multicolumn{4}{c}{\blankcell} \\
+    平衡读数 & \multicolumn{2}{c}{$1042.0$} & \multicolumn{2}{c}{$912.0$} \\
+    $R_{x\text{测}}=\sqrt{R_0R_0'}$ & \multicolumn{4}{c}{$974.83$} \\
     平衡后将检流计 $G$ 调偏 $0.1\,\si{\micro\ampere}$ &
     $G=-0.1\,\si{\micro\ampere}$ 时 $R_0/\si{\ohm}$ &
     $G=+0.1\,\si{\micro\ampere}$ 时 $R_0/\si{\ohm}$ &
     $G=-0.1\,\si{\micro\ampere}$ 时 $R_0'/\si{\ohm}$ &
     $G=+0.1\,\si{\micro\ampere}$ 时 $R_0'/\si{\ohm}$ \\
     调偏读数 & & & & \\
-    $\Delta R_0/\si{\ohm}$ & \multicolumn{4}{c}{\blankcell} \\
-    $\Delta R_x/\si{\ohm}$ & \multicolumn{4}{c}{\blankcell} \\
-    $R_x=R_{x\text{测}}\pm\Delta R_x\,/\si{\ohm}$ & \multicolumn{4}{c}{\blankcell} \\
+    $\Delta R_0/\si{\ohm}$ & \multicolumn{4}{c}{未测调偏数据，未计算} \\
+    $\Delta R_x/\si{\ohm}$ & \multicolumn{4}{c}{未测调偏数据，未计算} \\
+    $R_x=R_{x\text{测}}\pm\Delta R_x\,/\si{\ohm}$ & \multicolumn{4}{c}{$974.83$（未列调偏不确定度）} \\
     \bottomrule
   \end{tabularx}
 \end{LabRecordTable}
 
-\insertRawDataPage
+\section{数据处理}
+
+交换法测量中，待测电阻由
+\[
+  R_x=\sqrt{R_0R_0'}
+\]
+给出。对 $200\,\si{\ohm}$ 待测电阻，实验记录为
+\[
+  R_0=213.8\,\si{\ohm},\qquad R_0'=185.9\,\si{\ohm}.
+\]
+代入得
+\[
+  R_{x1}=\sqrt{213.8\times185.9}\,\si{\ohm}
+  =199.36\,\si{\ohm}.
+\]
+相对标称值的偏差为
+\[
+  \frac{R_{x1}-200}{200}\times100\%=-0.32\%.
+\]
+
+对 $1\,\si{\kilo\ohm}$ 待测电阻，实验记录为
+\[
+  R_0=1042.0\,\si{\ohm},\qquad R_0'=912.0\,\si{\ohm}.
+\]
+代入得
+\[
+  R_{x2}=\sqrt{1042.0\times912.0}\,\si{\ohm}
+  =974.83\,\si{\ohm}.
+\]
+相对标称值的偏差为
+\[
+  \frac{R_{x2}-1000}{1000}\times100\%=-2.52\%.
+\]
+
+本次实验按要求未记录调偏数据，因此不计算由调偏读数估计的 $\Delta R_0$ 与 $\Delta R_x$。上列结果只依据交换法平衡读数给出。
+
+\section{结论和误差分析}
+
+本实验用自组惠斯登电桥和交换法测得
+\[
+  R_{x1}=199.36\,\si{\ohm},\qquad
+  R_{x2}=974.83\,\si{\ohm}.
+\]
+其中 $200\,\si{\ohm}$ 待测电阻的相对偏差为 $-0.32\%$，与标称值符合较好；$1\,\si{\kilo\ohm}$ 待测电阻的相对偏差为 $-2.52\%$，测得值低于标称值。交换法通过两次互换 $R_0$ 与 $R_x$ 的位置并取几何平均，削弱了比例臂不完全相等和接触条件差异带来的系统误差。
+
+实验误差主要来自以下几个方面：一是电桥平衡点由数字万用表读数判断，零点附近读数跳动会影响 $R_0$ 与 $R_0'$ 的选取；二是电阻箱自身准确度、接线柱接触电阻和导线电阻会带来系统偏差；三是实验过程中电源电压的微小波动会改变桥路电流，从而影响平衡判断的灵敏度。由于本次未测调偏读数，不能进一步用灵敏度数据估算平衡判断误差，只能对测量值与标称值的偏差作定性分析。
+
+\insertSignedDataPage
 
 \end{document}
