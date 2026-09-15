@@ -22,16 +22,47 @@
 \RequirePackage{pdfpages}
 
 \RequirePackage{titling}
+\RequirePackage{fancyhdr}
 
-\RequirePackage{titlesec}
-\RequirePackage[UTF8]{ctex}
+\RequirePackage[UTF8,fontset=none,heading=true]{ctex}
 \RequirePackage[section]{placeins}
 
 \captionsetup{skip=10pt}
 
-\titleformat{\section}{\large\bfseries}{\chinese{section}、}{0em}{}
-\titleformat{\subsection}{\normalsize\bfseries}{(\chinese{subsection})}{1em}{}
-\titleformat{\subsubsection}{\normalsize\bfseries}{\arabic{subsubsection}.}{1em}{}
+% 正文宋体，加粗与标题用黑体（对齐数模模板习惯）
+\setCJKmainfont{SimSun}[
+  AutoFakeSlant = true,
+  BoldFont = SimHei
+]
+\setCJKsansfont{SimHei}[
+  AutoFakeSlant = true
+]
+\setCJKmonofont{SimSun}
+\newCJKfontfamily[hei]\heiti{SimHei}
+\newCJKfontfamily[song]\songti{SimSun}
+
+\ctexset{
+  section = {
+    format = \centering\zihao{4}\heiti,
+    nameformat = {},
+    titleformat = {},
+    aftername = \hspace{0.6em},
+    beforeskip = 1.2ex plus .2ex,
+    afterskip = 1.0ex plus .2ex
+  },
+  subsection = {
+    format = \raggedright\zihao{-4}\heiti,
+    aftername = \hspace{0.5em},
+    beforeskip = 1.0ex plus .2ex,
+    afterskip = 0.7ex plus .2ex
+  },
+  subsubsection = {
+    format = \raggedright\zihao{-4}\heiti,
+    aftername = \hspace{0.5em},
+    beforeskip = 0.8ex plus .2ex,
+    afterskip = 0.5ex plus .2ex
+  }
+}
 
 \RequirePackage{eso-pic}
 \RequirePackage{graphicx}
@@ -41,10 +72,24 @@
   \gdef\@ExamName{#1}%
 }
 
-\title{\bfseries \@ExamName}
+\title{\heiti \@ExamName}
+
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small 大学物理实验报告}
+\fancyhead[R]{\small \@ExamName}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\newcommand{\StuName}{王奕杰}
+\newcommand{\StuID}{20564830965}
+\newcommand{\StuClass}{微电子科学与工程 2 班}
+\newcommand{\ClassPeriod}{2026-2027 学年第一学期}
 
 \date{}
-\author{专业：微电子科学与工程 2 班 \quad 姓名：王奕杰 \quad 实验编号：6}
+\author{专业：\StuClass \quad 姓名：\StuName \quad 实验编号：9}
 
 \newtheorem{problem}{题}
 \newenvironment{solution}
@@ -177,8 +222,62 @@
 }
 \makeatother
 
+
+\makeatletter
+\newcommand{\insertCoverPage}{
+
+	\newgeometry{margin=0pt} % 使得位置从无页边距开始
+
+	\newpage\ThisCenterWallPaper{1}{../template/封面.pdf}
+	\thispagestyle{empty}
+
+	% \vspace in horizontal mode is deferred, so overlay the form fields
+	% with absolute page coordinates instead of stacking hspace/vspace.
+	\AddToShipoutPictureFG*{
+		\AtPageLowerLeft{
+			\begin{tikzpicture}[overlay, inner sep=0pt]
+				\node[anchor=west, font=\large] at (10.80cm, {\paperheight-13.017cm}) {\@ExamName};
+				\node[anchor=west, font=\large] at (10.80cm, {\paperheight-14.167cm}) {\StuName};
+				\node[anchor=west, font=\large] at (10.80cm, {\paperheight-15.316cm}) {\StuID};
+				\node[anchor=west, font=\large] at (10.80cm, {\paperheight-16.459cm}) {\StuClass};
+				\node[anchor=west, font=\large] at (10.80cm, {\paperheight-17.602cm}) {\ClassPeriod};
+			\end{tikzpicture}
+		}
+	}
+	\null
+
+	\newpage
+	\restoregeometry
+	\makeIntentionallyBlankPage
+	\setcounter{page}{1}
+}
+\makeatother
+
+\newcommand{\makeIntentionallyBlankPage}{%
+	\thispagestyle{empty}%
+	\AddToShipoutPictureFG*{%
+		\AtPageLowerLeft{%
+			\begin{tikzpicture}[overlay, inner sep=0pt]
+				\node[
+					font=\LARGE\sffamily,
+					text=black,
+					opacity=0.18,
+					align=center
+				] at (0.5\paperwidth, 0.5\paperheight)
+					{This page is intentionally left blank.};
+			\end{tikzpicture}%
+		}%
+	}%
+	\null
+	\clearpage
+}
+
 \newcommand{\insertSignedDataPage}{
 	\clearpage
+	\ifodd\value{page}
+	\else
+		\makeIntentionallyBlankPage
+	\fi
 	\thispagestyle{empty}
 	\AddToShipoutPicture*{
 		\put(0,0){
@@ -193,5 +292,6 @@
 	% \noindent 附件：原始数据
 	\section*{附件：原始数据}
 }
+
 
 \date{}
