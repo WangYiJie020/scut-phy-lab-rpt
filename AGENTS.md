@@ -1,7 +1,7 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-This repository contains LaTeX sources for physics lab coursework. Source files now live under `src/`, with report entrypoints at `src/绪论/main.tex`, `src/exp1-弗朗克/main.tex`, and `src/exp1-电子逸出功/main.tex`. Experiment-specific figures live under each report’s `assets/` folder. Shared report infrastructure is under `src/template/`, especially `src/template/myrpt.cls` and the bundled PDF assets.
+This repository contains LaTeX sources for physics lab coursework. Source files now live under `src/`, with each experiment report in its own directory and a `main.tex` entrypoint, for example `src/绪论/main.tex` and `src/exp8-分光计/main.tex`. Experiment-specific figures live under each report’s `assets/` folder. Shared report infrastructure is under `src/template/`, especially `src/template/myrpt.cls`, `src/template/封面.pdf`, and the bundled PDF assets.
 
 ## Build, Test, and Development Commands
 Use XeLaTeX because the documents depend on `xeCJK` and `ctex`.
@@ -18,13 +18,15 @@ make distclean
 The root `Makefile` uses XeLaTeX to compile every report directory under `src/` with a `main.tex` entrypoint, excluding `src/template/`. Final PDFs are written to `output/` and named after their directory, for example `output/exp1-弗朗克.pdf`. Intermediate files such as `*.aux`, `*.log`, and `*.out` are written under `build/`. The Makefile tracks dependencies and skips recompilation when sources are unchanged.
 
 ## Coding Style & Naming Conventions
-Keep LaTeX source readable and consistent with the existing files: 2-space indentation inside environments, one sentence or command block per line when practical, and aligned table rows for dense tabular data. Preserve the current naming pattern: report directories under `src/` use `main.tex` as the entry file, and image assets stay in the local `assets/` directory beside the document that uses them. Reuse `src/template/myrpt.cls` instead of redefining layout macros in each report.
+Keep LaTeX source readable and consistent with the existing files: 2-space indentation inside environments, one sentence or command block per line when practical, and aligned table rows for dense tabular data. Preserve the current naming pattern: report directories under `src/` use `main.tex` as the entry file, and image assets stay in the local `assets/` directory beside the document that uses them. Reuse `src/template/myrpt.cls` instead of redefining layout macros in each report. From `exp8-分光计` onward, start the document with `\insertCoverPage` and do not call `\maketitle`; the cover already carries the experiment name and student information. Earlier reports may still use `\maketitle`.
 
 ## Experiment Workflow
 Each experiment report is completed in two stages.
 
 1. Preparation stage: generate the report framework without measured data or data analysis.
 2. Completion stage: after the user provides reviewed data, fill in the tables, replace the raw-record appendix, and finish the analysis.
+
+From `exp8-分光计` onward, reports use `\insertCoverPage` in place of `\maketitle`. The cover fills 课程名称 / 姓名 / 学号 / 专业班级 / 开课学期 from the class macros (`\ExamName`, `\StuName`, `\StuID`, `\StuClass`, `\ClassPeriod`). The cover and the following blank page are unnumbered. `\insertSignedDataPage` starts the signed raw-record appendix on an odd page, inserting an intentionally blank page if needed.
 
 During the preparation stage:
 
