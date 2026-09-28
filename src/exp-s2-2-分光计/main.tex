@@ -1,5 +1,6 @@
 \documentclass{../template/myrpt}
-\ExamName{分光计的调整与使用}
+\ExamName{分光计光栅衍射}
+\ExamIdx{2}
 
 \usepackage{multirow}
 \pgfplotsset{compat=1.18}
@@ -10,6 +11,8 @@
 
 \begin{document}
 \insertCoverPage
+
+\maketitle
 
 \section{实验目的}
 \begin{enumerate}[label=\arabic*. ]
@@ -45,12 +48,18 @@ JJY1 型分光计、平面反射镜、低压汞灯、平面透射光栅。
 
 分光计又称分光测角仪，用于精确测量光线的偏转角。通过角度测量可以进一步得到光波波长、色散率和光栅常数等物理量。仪器主要由平行光管、载物台、望远镜和读数装置组成，结构如图~\ref{fig:spectrometer-structure} 所示。
 
-\begin{figure}[htbp]
+\begin{figure}[ht]
   \centering
-  \includegraphics[width=0.78\linewidth]{assets/spectrometer-structure.png}
+  \includegraphics[width=0.70\linewidth]{assets/spectrometer-structure.png}
   \caption{分光计的主要结构}
   \label{fig:spectrometer-structure}
 \end{figure}
+
+平行光管用来产生平行光束，狭缝位于物镜焦面上。
+望远镜用来接收平行光，分划板位于物镜焦面上，用自准直法可把它调到无穷远。
+载物台用于放置平面反射镜或光栅，台下三个调平螺钉互成 $120^\circ$，用来改变台面法线方向。
+读数装置由度盘和相隔约 $180^\circ$ 的两个游标窗口组成，JJY1 型分光计的最小分度一般为 $1'$。
+测量前必须使望远镜适合观察平行光，并令望远镜光轴、平行光管光轴都垂直于仪器转轴，否则测得的偏转角会带进系统误差。
 
 测量两束平行光之间的夹角，实际上就是测定它们的方位角。平行光束 1、2 在望远镜焦平面上分别会聚为 $A$、$B$ 两点。焦平面上的每一点都与一定方向的平行光相对应。若望远镜光轴由平行于光束 1 转到平行于光束 2，则光轴转过的角度就是这两束光的夹角 $\theta$。
 
@@ -66,7 +75,7 @@ JJY1 型分光计、平面反射镜、低压汞灯、平面透射光栅。
 \end{equation}
 若某对读数跨越 $0^\circ/360^\circ$，应先将角度换算到同一周期后再相减。读数关系如表~\ref{table:angle-mean} 所示。
 
-\begin{table}[htbp]
+\begin{table}[ht]
   \centering
   \caption{双游标测角}
   \label{table:angle-mean}
@@ -363,7 +372,27 @@ $\varphi=0$ 对应中央主极大。实际光栅缝数很多、缝宽很小，�
   \lambda_2
   &=551.56\,\si{\nano\metre}.
 \end{align*}
-平均 $\bar\lambda_{\mathrm{G}}=548.35\,\si{\nano\metre}$。相对汞绿线 $546.07\,\si{\nano\metre}$，两级相对误差为 $-0.17\%$ 和 $+1.01\%$，平均 $+0.42\%$。相应的 $u_{\lambda_1}=0.84\,\si{\nano\metre}$，$u_{\lambda_2}=0.42\,\si{\nano\metre}$。
+平均 $\bar\lambda_{\mathrm{G}}=548.35\,\si{\nano\metre}$。
+
+\paragraph{不确定度分析.}
+本次为单次测量，没有 A 类分量。B 类由游标最小分度传入。由 $\lambda=d\sin\varphi/\lvert k\rvert$ 且 $d$、$k$ 视为准确，
+\[
+  \frac{u_\lambda}{\lambda}=\lvert\cot\varphi\rvert\,u_\varphi,
+\]
+其中 $u_\varphi$ 已化为弧度。代入得
+\[
+  u_{\lambda_1}=0.84\,\si{\nano\metre},\qquad
+  u_{\lambda_2}=0.42\,\si{\nano\metre}.
+\]
+取包含因子 $\sqrt{3}$，扩展不确定度为 $U_{\lambda_1}=1.5\,\si{\nano\metre}$、$U_{\lambda_2}=0.72\,\si{\nano\metre}$。因而
+\[
+  \lambda_1=(545.2\pm1.5)\,\si{\nano\metre},\qquad
+  \lambda_2=(551.6\pm0.7)\,\si{\nano\metre}.
+\]
+二级的 $\varphi$ 较大，$\lvert\cot\varphi\rvert$ 较小，所以不确定度明显低于一级。
+
+\paragraph{误差分析.}
+相对汞绿线 $546.07\,\si{\nano\metre}$，两级相对误差为 $-0.17\%$ 和 $+1.01\%$，平均 $+0.42\%$。一级结果落在扩展不确定度内；二级偏离约 $5.5\,\si{\nano\metre}$，大于 $U_{\lambda_2}$，说明除读数分度外还有对准、光栅方位和狭缝宽度等系统因素。一级衍射角只有约 $3^\circ$，叉丝稍许偏离谱线中心就会显著改变 $\sin\varphi$。二级谱线较暗、较宽，对准误差也会变大，但 $\varphi$ 增大后相对传递系数下降，读数不确定度本身反而更小。
 
 \subsection{已知绿光波长测待测光栅常数}
 
@@ -381,7 +410,23 @@ $\varphi=0$ 对应中央主极大。实际光栅缝数很多、缝宽很小，�
   \bar d=3.332\times10^{-3}\,\si{\milli\metre},\qquad
   \bar N=300.1\,\mathrm{mm}^{-1}.
 \]
-两级相差约 $0.3\%$，待测光栅可定为 $300\,\mathrm{mm}^{-1}$。$u_d/d$ 在一级为 $0.051\%$，二级为 $0.024\%$。
+
+\paragraph{不确定度分析.}
+$\lambda$ 取标准值，视为准确。由 $d=\lvert k\rvert\lambda/\sin\varphi$，
+\[
+  \frac{u_d}{d}=\frac{u_N}{N}=\lvert\cot\varphi\rvert\,u_\varphi.
+\]
+一级 $u_d/d=0.051\%$，即 $u_{N_1}=0.15\,\mathrm{mm}^{-1}$；二级 $u_d/d=0.024\%$，即 $u_{N_2}=0.073\,\mathrm{mm}^{-1}$。两级相互独立时
+\[
+  u_{\bar N}=\frac12\sqrt{u_{N_1}^2+u_{N_2}^2}=0.084\,\mathrm{mm}^{-1}.
+\]
+取包含因子 $\sqrt{3}$，扩展不确定度 $U_{\bar N}=0.15\,\mathrm{mm}^{-1}$，故
+\[
+  \bar N=(300.1\pm0.2)\,\mathrm{mm}^{-1}.
+\]
+
+\paragraph{误差分析.}
+两级相差约 $0.3\%$，与各自不确定度同量级，待测光栅可定为 $300\,\mathrm{mm}^{-1}$。相对标称 $300\,\mathrm{mm}^{-1}$ 的偏差只有 $0.03\%$，远小于绿光波长测量的相对误差，说明换上较密光栅后衍射角增大，读数传递系数下降，常数测定比小角度测波长更稳。剩余差异主要来自光栅平面未严格垂直于平行光管光轴，以及二级谱线变暗导致的对准偏差。
 
 \subsection{待测光栅测黄光波长}
 
@@ -394,7 +439,22 @@ $\varphi=0$ 对应中央主极大。实际光栅缝数很多、缝宽很小，�
   &=\bar d\sin 10.000^\circ\times10^{6}
   =578.6\,\si{\nano\metre}.
 \end{align*}
-相对 $576.96$、$579.07\,\si{\nano\metre}$，误差为 $-0.54\%$ 和 $-0.08\%$。$u_\lambda$ 约为 $0.28\,\si{\nano\metre}$。角色散按式~\eqref{eq:angular-dispersion} 计算。
+
+\paragraph{不确定度分析.}
+$\lambda=\bar d\sin\varphi$ 同时依赖光栅常数和衍射角，
+\[
+  \frac{u_\lambda}{\lambda}
+  =\sqrt{\left(\frac{u_{\bar d}}{\bar d}\right)^2+(\cot\varphi\,u_\varphi)^2}.
+\]
+其中 $u_{\bar d}/\bar d=0.028\%$。两条黄线均有 $u_\lambda=0.32\,\si{\nano\metre}$，扩展不确定度 $U_\lambda=0.55\,\si{\nano\metre}$。因而
+\[
+  \lambda_{\mathrm{Y_I}}=(573.8\pm0.6)\,\si{\nano\metre},\qquad
+  \lambda_{\mathrm{Y_{II}}}=(578.6\pm0.6)\,\si{\nano\metre}.
+\]
+若只计游标读数、不计 $\bar d$ 的贡献，则 $u_\lambda$ 约为 $0.28\,\si{\nano\metre}$，与 $\bar d$ 项合成后变化不大，说明这一步仍由衍射角读数主导。
+
+\paragraph{误差分析.}
+相对 $576.96$、$579.07\,\si{\nano\metre}$，误差为 $-0.54\%$ 和 $-0.08\%$。黄光 II 与标准值之差落在扩展不确定度内；黄光 I 偏低约 $3.2\,\si{\nano\metre}$，超出 $U_\lambda$，更可能是谱线辨认或左右窗口对准时把较弱的黄 I 叉在翼上。两条黄线只隔约 $2\,\si{\nano\metre}$，狭缝略宽就会使线心判断向短波一侧偏移。不过双线仍被分开，级次和左右对称性也正常，说明光栅方位和分光计调节没有整体失效。
 
 \subsection{角色散和分辨本领}
 
@@ -420,11 +480,15 @@ $\varphi=0$ 对应中央主极大。实际光栅缝数很多、缝宽很小，�
 \]
 理论值 $R=kN$。平行光管照明宽度按约 $20\,\si{\milli\metre}$ 估计，则已知光栅 $N\approx2.0\times10^{3}$，待测光栅 $N\approx6.0\times10^{3}$。$k=1$ 时理论分辨本领已大于 274，与实验中仍能分开黄双线相符。
 
-\subsection{结论和误差}
+\section{实验的分析和总结}
 
-用 $100\,\mathrm{mm}^{-1}$ 光栅测得汞绿线平均波长 $548.35\,\si{\nano\metre}$，相对误差 $0.42\%$。用汞绿线测得待测光栅 $\bar N=300.1\,\mathrm{mm}^{-1}$，两级一致。黄双线是在该 $300\,\mathrm{mm}^{-1}$ 光栅上、以 $k=\pm1$ 测的，得到 $573.8$、$578.6\,\si{\nano\metre}$，相对误差均小于 $1\%$。
+分光计经自准直和各半调节后，能够稳定看到汞灯左右对称的衍射光谱，二级黄双线仍可分辨，说明望远镜已聚焦于无穷远、光栅刻痕近似平行于转轴、光栅平面也近似垂直于平行光管光轴。用 $100\,\mathrm{mm}^{-1}$ 光栅测得汞绿线平均波长 $548.35\,\si{\nano\metre}$，相对标准值偏差 $0.42\%$；用汞绿线定出待测光栅 $\bar N=(300.1\pm0.2)\,\mathrm{mm}^{-1}$，两级相差约 $0.3\%$；再在该光栅上以 $k=\pm1$ 测黄双线，得到 $573.8$、$578.6\,\si{\nano\metre}$，相对误差均小于 $1\%$。光栅越密、级次越高，角色散越大，与式~\eqref{eq:angular-dispersion} 一致。这些结果达到了实验目的。
 
-主要误差还有叉丝对准、空程以及单次测量没有 A 类分量。B 类按 $1'$ 估计。
+从原理上看，左右同级读数取平均可以消去度盘偏心，也减弱转轴未过光栅面带来的绝对方位偏差，因此测量量是衍射角而不是谱线的绝对方位。一级绿光衍射角只有约 $3^\circ$，$\lvert\cot\varphi\rvert$ 很大，读数传递系数高，波长对对准误差最敏感；换成约 $300\,\mathrm{mm}^{-1}$ 的光栅后 $\varphi$ 增大到 $9^\circ$--$19^\circ$，同一游标精度下相对不确定度明显下降，所以光栅常数比小角度测波长更稳。黄双线间隔约 $2\,\si{\nano\metre}$，实验中仍能分开，与按照明宽度估计的理论分辨本领大于 274 相符。
+
+按误差性质，偶然误差主要是叉丝与谱线中心的对准起伏、单向转动时的定位差，以及单次测量无法估计的 A 类分量；系统误差主要是分光计最小分度 $1'$、望远镜与转轴的残余不垂直、光栅刻痕不均匀或表面反射叠像、狭缝宽度造成的线心偏移，以及平行光并非严格的夫琅和费条件。B 类不确定度只计入了游标分度，因此二级绿光和黄光 I 相对标准值的偏离超出扩展不确定度，并不能用读数精度单独解释，更应归入对准和谱线辨认。
+
+改进上应在同一状态下对每条谱线重复测量以补上 A 类评定，把狭缝再收窄并确认黄双线的线心，望远镜只沿一个方向对准以减小空程，并在记录前核对左右同级偏角是否接近相等。总体来看，待测光栅常数和黄光 II 与标准值一致较好，绿光和黄光 I 的偏差仍在百分之一量级以内，实验结论可以使用。
 
 % 本次教师说明不做思考题。
 \iffalse
