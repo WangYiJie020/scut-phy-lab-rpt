@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{myrpt}[My Template]
 
-\LoadClass{article} % 继承自 article 类
+\LoadClass[twoside]{article} % 继承自 article 类，便于奇偶页眉
 
 \RequirePackage{xeCJK}
 % \RequirePackage[a4paper,top=2.54cm,bottom=2.54cm,left=3.18cm,right=3.18cm]{geometry} % ,marginparwidth=1.75cm
@@ -16,6 +16,7 @@
 \RequirePackage[colorlinks=true, allcolors=blue]{hyperref}
 
 \RequirePackage{enumitem}
+\setlist[enumerate]{itemsep=0.25ex, parsep=0pt, topsep=0.4ex}
 \RequirePackage{booktabs} % 三线表
 \RequirePackage{tabularx}
 \RequirePackage{caption}
@@ -40,6 +41,7 @@
 \setCJKmonofont{SimSun}
 \newCJKfontfamily[hei]\heiti{SimHei}
 \newCJKfontfamily[song]\songti{SimSun}
+\newCJKfontfamily[songbf]\songbf{SimSun}[AutoFakeBold=2.5]
 
 \ctexset{
   section = {
@@ -71,25 +73,33 @@
 \newcommand{\ExamName}[1]{%
   \gdef\@ExamName{#1}%
 }
+\newcommand{\@ExamIdx}{0}
+\newcommand{\ExamIdx}[1]{%
+  \gdef\@ExamIdx{#1}%
+}
 
 \title{\heiti \@ExamName}
 
 \setlength{\headheight}{14pt}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small 大学物理实验报告}
-\fancyhead[R]{\small \@ExamName}
+\fancyhead[LE]{\small 大学物理实验报告}
+\fancyhead[RO]{\small 实验{\@ExamIdx}\quad\@ExamName}
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
 
-\newcommand{\StuName}{王奕杰}
-\newcommand{\StuID}{20564830965}
-\newcommand{\StuClass}{微电子科学与工程 2 班}
-\newcommand{\ClassPeriod}{2026-2027 学年第一学期}
+\newcommand{\StuName}{示例姓名}
+\newcommand{\StuID}{2025XXXXXXXX}
+\newcommand{\StuClass}{微电子科学与工程 X 班}
+\newcommand{\ClassPeriod}{2025-2026 学年第一学期}
+% \newcommand{\StuName}{王奕杰}
+% \newcommand{\StuID}{20564830965}
+% \newcommand{\StuClass}{微电子科学与工程 2 班}
+% \newcommand{\ClassPeriod}{2026-2027 学年第一学期}
 
 \date{}
-\author{专业：\StuClass \quad 姓名：\StuName \quad 实验编号：9}
+\author{专业：\StuClass \quad 姓名：\StuName \quad 实验编号：X}
 
 \newtheorem{problem}{题}
 \newenvironment{solution}
@@ -289,8 +299,8 @@
 			}
 		}
 	}
-	% \noindent 附件：原始数据
-	\section*{附件：原始数据}
+	% 附件标题沿用旧 section 样式：左对齐衬线，不走黑体居中标题
+	\noindent{\normalfont\large\songbf\bfseries 附件：原始数据}\par
 }
 
 

@@ -18,7 +18,7 @@ make distclean
 The root `Makefile` uses XeLaTeX to compile every report directory under `src/` with a `main.tex` entrypoint, excluding `src/template/`. Final PDFs are written to `output/` and named after their directory, for example `output/exp1-弗朗克.pdf`. Intermediate files such as `*.aux`, `*.log`, and `*.out` are written under `build/`. The Makefile tracks dependencies and skips recompilation when sources are unchanged.
 
 ## Coding Style & Naming Conventions
-Keep LaTeX source readable and consistent with the existing files: 2-space indentation inside environments, one sentence or command block per line when practical, and aligned table rows for dense tabular data. Preserve the current naming pattern: report directories under `src/` use `main.tex` as the entry file, and image assets stay in the local `assets/` directory beside the document that uses them. Reuse `src/template/myrpt.cls` instead of redefining layout macros in each report. From `exp8-分光计` onward, start the document with `\insertCoverPage` and do not call `\maketitle`; the cover already carries the experiment name and student information. Earlier reports may still use `\maketitle`.
+Keep LaTeX source readable and consistent with the existing files: 2-space indentation inside environments, one sentence or command block per line when practical, and aligned table rows for dense tabular data. Preserve the current naming pattern: report directories under `src/` use `main.tex` as the entry file, and image assets stay in the local `assets/` directory beside the document that uses them. Reuse `src/template/myrpt.cls` instead of redefining layout macros in each report. From `exp8-分光计` onward, start the document with `\insertCoverPage` and still call `\maketitle` after the cover. The cover carries the experiment name and student information; `\maketitle` remains the in-text title block.
 
 ## Experiment Workflow
 Each experiment report is completed in two stages.
@@ -26,7 +26,7 @@ Each experiment report is completed in two stages.
 1. Preparation stage: generate the report framework without measured data or data analysis.
 2. Completion stage: after the user provides reviewed data, fill in the tables, replace the raw-record appendix, and finish the analysis.
 
-From `exp8-分光计` onward, reports use `\insertCoverPage` in place of `\maketitle`. The cover fills 课程名称 / 姓名 / 学号 / 专业班级 / 开课学期 from the class macros (`\ExamName`, `\StuName`, `\StuID`, `\StuClass`, `\ClassPeriod`). The cover and the following blank page are unnumbered. `\insertSignedDataPage` starts the signed raw-record appendix on an odd page, inserting an intentionally blank page if needed.
+From `exp8-分光计` onward, reports use `\insertCoverPage` and still call `\maketitle`. The cover fills 课程名称 / 姓名 / 学号 / 专业班级 / 开课学期 from the class macros (`\ExamName`, `\StuName`, `\StuID`, `\StuClass`, `\ClassPeriod`). The running header is two-sided: even pages show `大学物理实验报告` on the left, odd pages show `\ExamName(第\ExamIdx次实验)` on the right. Override the index with `\ExamIdx{n}` (default `0`). The cover and the following blank page are unnumbered. `\insertSignedDataPage` starts the signed raw-record appendix on an odd page, inserting an intentionally blank page if needed.
 
 During the preparation stage:
 
@@ -54,6 +54,8 @@ During the completion stage:
 - `\insertSignedDataPage` is the standard way to insert the signed raw-record scan; do not manually recreate that page layout in each report unless there is a specific exception.
 - Fill the measured data back into the tables in the `tex` source.
 - Then read `src/xxx/ref/*.docx` and complete the missing data-analysis sections in the report.
+- In `数据处理`, each measurement item must include both 误差分析 and 不确定度分析: compare the result with the accepted or expected value, identify systematic versus random sources specific to that measurement, propagate Type B (and Type A if repeated) uncertainties, and report the result with uncertainty.
+- After data processing, add a `\section{实验的分析和总结}` that interprets the results, classifies overall error sources, and states whether the experiment objectives were met. Do not fold this into a short remark at the end of `数据处理`.
 - If extra tooling is needed to inspect or extract content from a `.docx` file, ask the user before installing it.
 
 ## Testing Guidelines
